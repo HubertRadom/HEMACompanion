@@ -3,7 +3,7 @@
   "name": "hema-companion",
   "main": "@astrojs/cloudflare/entrypoints/server",
   "compatibility_date": "2026-05-08",
-  "compatibility_flags": ["nodejs_compat", "fetch_iterable_type_support"],
+  "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "binding": "ASSETS",
     "directory": "./dist",
