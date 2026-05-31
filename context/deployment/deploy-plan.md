@@ -83,7 +83,7 @@
 
 - [x] Project created — ref: `welwzvjoqvutnuhqnckw`
 - [x] `SUPABASE_URL` and `SUPABASE_KEY` set as Worker runtime secrets
-- [ ] **Configure auth redirect URLs:**
+- [x] **Configure auth redirect URLs:**
   - Site URL: `https://hema-companion.hub-rad1.workers.dev`
   - Redirect URLs: `https://hema-companion.hub-rad1.workers.dev/**`
 - [ ] Database migrations (deferred — no schema yet)
