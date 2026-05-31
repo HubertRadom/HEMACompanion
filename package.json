@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node -e \"const fs=require('fs'),p='dist/server/wrangler.json',c=JSON.parse(fs.readFileSync(p,'utf8'));delete c.kv_namespaces;delete c.images;if(c.previews){delete c.previews.kv_namespaces;delete c.previews.images;}fs.writeFileSync(p,JSON.stringify(c));\"",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
