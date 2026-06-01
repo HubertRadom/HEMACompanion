@@ -22,10 +22,9 @@
 | GitHub secrets | `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `SUPABASE_URL`, `SUPABASE_KEY` |
 
 **Remaining actions:**
-- [ ] Supabase auth redirect URLs — set Site URL + Redirect URLs to production URL (Phase 2)
-- [ ] Smoke test auth flow end-to-end (Phase 4)
-- [ ] Lock preview URLs (Phase 6)
 - [!] Rotate all Cloudflare API tokens used in this session — they were exposed in conversation
+- [ ] Lock preview URLs (Phase 6)
+- [ ] Custom domain (post-MVP)
 
 ---
 
@@ -102,12 +101,8 @@
 ## Phase 4 — Smoke test
 
 - [x] Site loads (confirmed by user)
-- [ ] Register → receive confirmation email → link redirects to production domain
-- [ ] Sign in → `/dashboard` accessible
-- [ ] Sign out → redirect to `/auth/signin`
-- [ ] `/dashboard` blocked when unauthenticated
-
-> Complete Supabase auth redirect URL config (Phase 2) before testing email confirmation links.
+- [x] Auto-deploy via GitHub Actions verified — title change deployed end-to-end
+- [x] Auth flow confirmed working end-to-end (sign up → confirm email → sign in → dashboard → sign out)
 
 ---
 
