@@ -323,15 +323,15 @@ First database migration in the project. Create `supabase/migrations/` directory
 #### Manual
 
 - [x] 2.4 /gear redirects to sign-in when unauthenticated — 3443fd7
-- [ ] 2.5 AppNav renders with Gear active and stubbed future links
+- [x] 2.5 AppNav renders with Gear active and stubbed future links
 - [x] 2.6 Dashboard shows working link to /gear — 3443fd7
 
 ### Phase 3: API Routes
 
 #### Automated
 
-- [x] 3.1 TypeScript check passes: `npx astro check`
-- [x] 3.2 Lint passes: `npm run lint`
+- [x] 3.1 TypeScript check passes: `npx astro check` — e483cd4
+- [x] 3.2 Lint passes: `npm run lint` — e483cd4
 
 #### Manual
 
@@ -341,15 +341,15 @@ First database migration in the project. Create `supabase/migrations/` directory
 
 #### Automated
 
-- [ ] 4.1 TypeScript check passes: `npx astro check`
-- [ ] 4.2 Lint passes: `npm run lint`
-- [ ] 4.3 Build succeeds: `npm run build`
+- [x] 4.1 TypeScript check passes: `npx astro check`
+- [x] 4.2 Lint passes: `npm run lint`
+- [x] 4.3 Build succeeds: `npm run build`
 
 #### Manual
 
-- [ ] 4.4 /gear empty state renders correctly for new user
-- [ ] 4.5 Add gear item creates item visible in list
-- [ ] 4.6 Edit gear item pre-fills form and saves correctly
-- [ ] 4.7 Delete with confirm removes item; cancel does not
-- [ ] 4.8 Second user cannot access first user's item edit page (RLS enforced)
-- [ ] 4.9 Sign out from AppNav redirects to sign-in
+- [x] 4.4 /gear empty state renders correctly for new user
+- [x] 4.5 Add gear item creates item visible in list
+- [x] 4.6 Edit gear item pre-fills form and saves correctly
+- [x] 4.7 Delete with confirm removes item; cancel does not
+- [x] 4.8 Second user cannot access first user's item edit page (RLS enforced)
+- [x] 4.9 Sign out from AppNav redirects to sign-in
