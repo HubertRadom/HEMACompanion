@@ -28,6 +28,7 @@ if (supabase && user) {
   gearItems = itemsResult.data ?? [];
 
   const gearSetIds = gearSets.map((s) => s.id);
+  // scoped via gearSetIds (user-filtered) + RLS on gear_sets.user_id
   if (gearSetIds.length > 0) {
     const compositionsResult = await supabase
       .from("gear_set_compositions")
