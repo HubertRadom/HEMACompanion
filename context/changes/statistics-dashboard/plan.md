@@ -204,29 +204,29 @@ All queries include `.eq("user_id", user.id)` — the RLS-indexed `user_id` colu
 
 #### Automated
 
-- [x] 1.1 TypeScript check passes: `npx astro check`
-- [x] 1.2 Lint passes: `npm run lint`
+- [x] 1.1 TypeScript check passes: `npx astro check` — 67c11ec
+- [x] 1.2 Lint passes: `npm run lint` — 67c11ec
 
 #### Manual
 
-- [x] 1.3 /stats redirects to sign-in when unauthenticated
-- [x] 1.4 Stats link in AppNav is live and highlights when on /stats
+- [x] 1.3 /stats redirects to sign-in when unauthenticated — 67c11ec
+- [x] 1.4 Stats link in AppNav is live and highlights when on /stats — 67c11ec
 
 ### Phase 2: Statistics Page
 
 #### Automated
 
-- [ ] 2.1 TypeScript check passes: `npx astro check`
-- [ ] 2.2 Lint passes: `npm run lint`
-- [ ] 2.3 Build succeeds: `npm run build`
+- [x] 2.1 TypeScript check passes: `npx astro check`
+- [x] 2.2 Lint passes: `npm run lint`
+- [x] 2.3 Build succeeds: `npm run build`
 
 #### Manual
 
-- [ ] 2.4 /stats with no fights shows empty state with CTA to /fights/add
-- [ ] 2.5 One win logged: total = 1, winrate = 100%, opponent appears in top-5
-- [ ] 2.6 Mix of wins and losses: global winrate reflects correct percentage
-- [ ] 2.7 6+ distinct opponents: top-5 list shows exactly 5 entries ranked by fight count
-- [ ] 2.8 Fight with gear set: gear set and gear items appear in gear stats sections with correct counts
-- [ ] 2.9 Fight without gear set: fight counted in summary; gear stats unaffected
-- [ ] 2.10 Delete gear set: fight count unchanged; gear set and its items no longer shown in gear stats
-- [ ] 2.11 /stats redirects to sign-in when unauthenticated
+- [x] 2.4 /stats with no fights shows empty state with CTA to /fights/add
+- [x] 2.5 One win logged: total = 1, winrate = 100%, opponent appears in top-5
+- [x] 2.6 Mix of wins and losses: global winrate reflects correct percentage
+- [x] 2.7 6+ distinct opponents: top-5 list shows exactly 5 entries ranked by fight count
+- [x] 2.8 Fight with gear set: gear set and gear items appear in gear stats sections with correct counts
+- [x] 2.9 Fight without gear set: fight counted in summary; gear stats unaffected
+- [x] 2.10 Delete gear set: fight count unchanged; gear set and its items no longer shown in gear stats
+- [x] 2.11 /stats redirects to sign-in when unauthenticated
