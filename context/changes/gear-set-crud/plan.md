@@ -306,29 +306,29 @@ Apply via `npx supabase db push` (requires `supabase login` and project linked t
 
 #### Automated
 
-- [x] 2.1 TypeScript check passes: `npx astro check`
-- [x] 2.2 Lint passes: `npm run lint`
+- [x] 2.1 TypeScript check passes: `npx astro check` — ae9e2c3
+- [x] 2.2 Lint passes: `npm run lint` — ae9e2c3
 
 #### Manual
 
-- [ ] 2.3 Error redirect flows surface error messages on form pages
+- [x] 2.3 Error redirect flows surface error messages on form pages
 
 ### Phase 3: UI Pages
 
 #### Automated
 
-- [ ] 3.1 TypeScript check passes: `npx astro check`
-- [ ] 3.2 Lint passes: `npm run lint`
-- [ ] 3.3 Build succeeds: `npm run build`
+- [x] 3.1 TypeScript check passes: `npx astro check`
+- [x] 3.2 Lint passes: `npm run lint`
+- [x] 3.3 Build succeeds: `npm run build`
 
 #### Manual
 
-- [ ] 3.4 /gear-sets empty state renders correctly for new user
-- [ ] 3.5 Create form shows checkboxes and creates a set with item names visible in list
-- [ ] 3.6 Client-side validation blocks submit with empty name or no items checked
-- [ ] 3.7 Edit form pre-fills name and pre-checks correct items; saving updates the list
-- [ ] 3.8 Delete with confirm removes set; cancel does not
-- [ ] 3.9 Second user cannot access first user's set edit page (RLS enforced)
-- [ ] 3.10 /gear-sets/add with no gear items shows empty state CTA instead of form
-- [ ] 3.11 Deleting a gear item cascades: set shows No items on list page
-- [ ] 3.12 /gear-sets redirects to sign-in when unauthenticated
+- [x] 3.4 /gear-sets empty state renders correctly for new user
+- [x] 3.5 Create form shows checkboxes and creates a set with item names visible in list
+- [x] 3.6 Client-side validation blocks submit with empty name or no items checked
+- [x] 3.7 Edit form pre-fills name and pre-checks correct items; saving updates the list
+- [x] 3.8 Delete with confirm removes set; cancel does not
+- [x] 3.9 Second user cannot access first user's set edit page (RLS enforced)
+- [x] 3.10 /gear-sets/add with no gear items shows empty state CTA instead of form
+- [x] 3.11 Deleting a gear item cascades: set shows No items on list page
+- [x] 3.12 /gear-sets redirects to sign-in when unauthenticated
