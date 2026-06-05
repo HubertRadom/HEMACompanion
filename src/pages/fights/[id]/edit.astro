@@ -1,0 +1,64 @@
+---
+import AppLayout from "@/layouts/AppLayout.astro";
+import { createClient } from "@/lib/supabase";
+import FightForm from "@/components/fights/FightForm";
+import type { Fight, GearSet } from "@/lib/types";
+
+const { id } = Astro.params;
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+const user = Astro.locals.user;
+
+const [fightResult, setsResult] =
+  supabase && user
+    ? await Promise.all([
+        supabase.from("fights").select("*").eq("id", id).eq("user_id", user.id).maybeSingle(),
+        supabase.from("gear_sets").select("id, name").eq("user_id", user.id).order("name"),
+      ])
+    : [
+        { data: null, error: null },
+        { data: null, error: null },
+      ];
+
+const fight = fightResult.data as Fight | null;
+const gearSets = (setsResult.data ?? []) as GearSet[];
+const error = fightResult.error?.message ?? setsResult.error?.message ?? Astro.url.searchParams.get("error");
+---
+
+<AppLayout title="Edit Fight">
+  <div class="mx-auto max-w-xl px-6 py-10">
+    <div class="mb-6">
+      <a href="/fights" class="text-sm text-blue-100/60 hover:text-white">← Fights</a>
+      <h1 class="mt-2 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent">
+        Edit Fight
+      </h1>
+    </div>
+
+    {
+      !fight ? (
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-10 text-center">
+          <p class="mb-4 text-blue-100/60">Fight not found.</p>
+          <a
+            href="/fights"
+            class="inline-block rounded-lg border border-white/20 bg-white/10 px-5 py-2 text-sm text-white transition-colors hover:bg-white/20"
+          >
+            Back to Fights
+          </a>
+        </div>
+      ) : (
+        <FightForm
+          action={`/api/fights/${id}`}
+          gearSets={gearSets}
+          initialValues={{
+            opponent_name: fight.opponent_name,
+            weapon_category: fight.weapon_category,
+            result: fight.result,
+            date: fight.date,
+            gear_set_id: fight.gear_set_id,
+          }}
+          serverError={error}
+          client:load
+        />
+      )
+    }
+  </div>
+</AppLayout>

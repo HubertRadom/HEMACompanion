@@ -1,0 +1,99 @@
+---
+import AppLayout from "@/layouts/AppLayout.astro";
+import { createClient } from "@/lib/supabase";
+import type { Fight } from "@/lib/types";
+
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+const user = Astro.locals.user;
+const result =
+  supabase && user
+    ? await supabase
+        .from("fights")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("date", { ascending: false })
+        .order("created_at", { ascending: false })
+    : null;
+
+const fights = (result?.data ?? []) as Fight[];
+const error = result?.error?.message ?? Astro.url.searchParams.get("error");
+
+const resultBadge: Record<string, string> = {
+  win: "border-green-500/30 bg-green-900/30 text-green-300",
+  loss: "border-red-500/30 bg-red-900/30 text-red-300",
+  draw: "border-yellow-500/30 bg-yellow-900/30 text-yellow-300",
+};
+---
+
+<AppLayout title="My Fights">
+  <div class="mx-auto max-w-3xl px-6 py-10">
+    <div class="mb-6 flex items-center justify-between">
+      <h1 class="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent">
+        My Fights
+      </h1>
+      <a
+        href="/fights/add"
+        class="rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm text-white transition-colors hover:bg-white/20"
+      >
+        + Log fight
+      </a>
+    </div>
+
+    {
+      error && (
+        <p class="mb-4 rounded-lg border border-red-500/30 bg-red-900/30 px-3 py-2 text-sm text-red-300">{error}</p>
+      )
+    }
+
+    {
+      fights.length === 0 ? (
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-12 text-center">
+          <p class="mb-4 text-blue-100/60">No fights logged yet.</p>
+          <a
+            href="/fights/add"
+            class="inline-block rounded-lg border border-white/20 bg-white/10 px-5 py-2 text-sm text-white transition-colors hover:bg-white/20"
+          >
+            Log your first fight
+          </a>
+        </div>
+      ) : (
+        <ul class="space-y-3">
+          {fights.map((fight) => (
+            <li class="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-5 py-4">
+              <div class="flex min-w-0 flex-1 items-center gap-4">
+                <span class="w-24 shrink-0 text-sm text-blue-100/50">{fight.date}</span>
+                <span class="min-w-0 truncate font-semibold text-white">{fight.opponent_name}</span>
+                <span
+                  class:list={[
+                    "shrink-0 rounded-full border px-2 py-0.5 text-xs font-medium capitalize",
+                    resultBadge[fight.result] ?? "border-white/20 text-white/60",
+                  ]}
+                >
+                  {fight.result}
+                </span>
+                <span class="shrink-0 text-sm text-blue-100/50 capitalize">{fight.weapon_category}</span>
+              </div>
+              <div class="ml-4 flex shrink-0 items-center gap-2">
+                <a
+                  href={`/fights/${fight.id}/edit`}
+                  class="rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white transition-colors hover:bg-white/20"
+                >
+                  Edit
+                </a>
+                <form method="POST" action={`/api/fights/${fight.id}/delete`}>
+                  <button
+                    type="submit"
+                    onclick="return confirm('Delete this fight?')"
+                    class="rounded-lg border border-red-500/30 bg-red-900/20 px-3 py-1.5 text-sm text-red-300 transition-colors hover:bg-red-900/40"
+                  >
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</AppLayout>
