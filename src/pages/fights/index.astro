@@ -16,7 +16,9 @@ const result =
     : null;
 
 const fights = (result?.data ?? []) as Fight[];
-const error = result?.error?.message ?? Astro.url.searchParams.get("error");
+const referer = Astro.request.headers.get("referer") ?? "";
+const urlError = referer.startsWith(Astro.url.origin) ? Astro.url.searchParams.get("error") : null;
+const error = result?.error?.message ?? urlError;
 
 const resultBadge: Record<string, string> = {
   win: "border-green-500/30 bg-green-900/30 text-green-300",

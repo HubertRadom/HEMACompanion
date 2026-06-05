@@ -10,7 +10,9 @@ const result =
   supabase && user ? await supabase.from("gear_sets").select("id, name").eq("user_id", user.id).order("name") : null;
 
 const gearSets = (result?.data ?? []) as GearSet[];
-const serverError = result?.error?.message ?? Astro.url.searchParams.get("error");
+const referer = Astro.request.headers.get("referer") ?? "";
+const urlError = referer.startsWith(Astro.url.origin) ? Astro.url.searchParams.get("error") : null;
+const serverError = result?.error?.message ?? urlError;
 ---
 
 <AppLayout title="Log Fight">

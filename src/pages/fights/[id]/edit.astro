@@ -21,7 +21,9 @@ const [fightResult, setsResult] =
 
 const fight = fightResult.data as Fight | null;
 const gearSets = (setsResult.data ?? []) as GearSet[];
-const error = fightResult.error?.message ?? setsResult.error?.message ?? Astro.url.searchParams.get("error");
+const referer = Astro.request.headers.get("referer") ?? "";
+const urlError = referer.startsWith(Astro.url.origin) ? Astro.url.searchParams.get("error") : null;
+const error = fightResult.error?.message ?? setsResult.error?.message ?? urlError;
 ---
 
 <AppLayout title="Edit Fight">

@@ -114,7 +114,6 @@ export default function FightForm({ action, gearSets, initialValues, serverError
 
       <FormField
         id="date"
-        name="date"
         label="Date"
         type="date"
         value={date}

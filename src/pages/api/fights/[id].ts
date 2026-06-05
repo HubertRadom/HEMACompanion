@@ -39,6 +39,20 @@ export const POST: APIRoute = async (context) => {
   if (!date) {
     return context.redirect(`/fights/${id}/edit?error=${encodeURIComponent("Date is required")}`);
   }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return context.redirect(`/fights/${id}/edit?error=${encodeURIComponent("Invalid date format")}`);
+  }
+  if (gearSetId) {
+    const { data: ownedSet } = await supabase
+      .from("gear_sets")
+      .select("id")
+      .eq("id", gearSetId)
+      .eq("user_id", user.id)
+      .maybeSingle();
+    if (!ownedSet) {
+      return context.redirect(`/fights/${id}/edit?error=${encodeURIComponent("Invalid gear set")}`);
+    }
+  }
 
   const { data: updatedFight, error: updateError } = await supabase
     .from("fights")

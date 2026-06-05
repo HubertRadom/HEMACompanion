@@ -1,7 +1,7 @@
 ---
 id: sparring-log-crud
 title: Sparring Log CRUD
-status: implemented
+status: impl_reviewed
 created: 2026-06-05
 updated: 2026-06-05
 
