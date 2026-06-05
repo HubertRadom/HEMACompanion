@@ -1,6 +1,7 @@
 ---
 const pathname = Astro.url.pathname;
-const isGear = pathname.startsWith("/gear");
+const isGear = pathname.startsWith("/gear") && !pathname.startsWith("/gear-sets");
+const isGearSets = pathname.startsWith("/gear-sets");
 ---
 
 <nav class="sticky top-0 z-10 border-b border-white/10 bg-black/30 backdrop-blur-xl">
@@ -19,7 +20,15 @@ const isGear = pathname.startsWith("/gear");
       >
         Gear
       </a>
-      <span class="cursor-default rounded-lg px-3 py-1.5 text-sm text-white/25">Gear Sets</span>
+      <a
+        href="/gear-sets"
+        class:list={[
+          "rounded-lg px-3 py-1.5 text-sm transition-colors",
+          isGearSets ? "bg-white/15 text-white" : "text-blue-100/70 hover:bg-white/10 hover:text-white",
+        ]}
+      >
+        Gear Sets
+      </a>
       <span class="cursor-default rounded-lg px-3 py-1.5 text-sm text-white/25">Fights</span>
       <span class="cursor-default rounded-lg px-3 py-1.5 text-sm text-white/25">Stats</span>
     </div>
