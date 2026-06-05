@@ -216,17 +216,17 @@ All queries include `.eq("user_id", user.id)` — the RLS-indexed `user_id` colu
 
 #### Automated
 
-- [x] 2.1 TypeScript check passes: `npx astro check`
-- [x] 2.2 Lint passes: `npm run lint`
-- [x] 2.3 Build succeeds: `npm run build`
+- [x] 2.1 TypeScript check passes: `npx astro check` — e69dc24
+- [x] 2.2 Lint passes: `npm run lint` — e69dc24
+- [x] 2.3 Build succeeds: `npm run build` — e69dc24
 
 #### Manual
 
-- [x] 2.4 /stats with no fights shows empty state with CTA to /fights/add
-- [x] 2.5 One win logged: total = 1, winrate = 100%, opponent appears in top-5
-- [x] 2.6 Mix of wins and losses: global winrate reflects correct percentage
-- [x] 2.7 6+ distinct opponents: top-5 list shows exactly 5 entries ranked by fight count
-- [x] 2.8 Fight with gear set: gear set and gear items appear in gear stats sections with correct counts
-- [x] 2.9 Fight without gear set: fight counted in summary; gear stats unaffected
-- [x] 2.10 Delete gear set: fight count unchanged; gear set and its items no longer shown in gear stats
-- [x] 2.11 /stats redirects to sign-in when unauthenticated
+- [x] 2.4 /stats with no fights shows empty state with CTA to /fights/add — e69dc24
+- [x] 2.5 One win logged: total = 1, winrate = 100%, opponent appears in top-5 — e69dc24
+- [x] 2.6 Mix of wins and losses: global winrate reflects correct percentage — e69dc24
+- [x] 2.7 6+ distinct opponents: top-5 list shows exactly 5 entries ranked by fight count — e69dc24
+- [x] 2.8 Fight with gear set: gear set and gear items appear in gear stats sections with correct counts — e69dc24
+- [x] 2.9 Fight without gear set: fight counted in summary; gear stats unaffected — e69dc24
+- [x] 2.10 Delete gear set: fight count unchanged; gear set and its items no longer shown in gear stats — e69dc24
+- [x] 2.11 /stats redirects to sign-in when unauthenticated — e69dc24
