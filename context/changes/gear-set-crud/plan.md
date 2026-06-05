@@ -289,25 +289,25 @@ Apply via `npx supabase db push` (requires `supabase login` and project linked t
 
 #### Automated
 
-- [x] 1.1 Migration applies cleanly: `npx supabase db push`
-- [x] 1.2 TypeScript check passes: `npx astro check`
-- [x] 1.3 Lint passes: `npm run lint`
+- [x] 1.1 Migration applies cleanly: `npx supabase db push` — 5b440ff
+- [x] 1.2 TypeScript check passes: `npx astro check` — 5b440ff
+- [x] 1.3 Lint passes: `npm run lint` — 5b440ff
 
 #### Manual
 
-- [x] 1.4 gear_sets and gear_set_compositions tables visible in Supabase dashboard
-- [x] 1.5 RLS enabled on both tables with correct policies listed
-- [x] 1.6 gear_set_compositions has unique constraint and cascade FKs confirmed
-- [x] 1.7 /gear-sets redirects to sign-in when unauthenticated
-- [x] 1.8 AppNav shows Gear Sets as active link (not grayed out)
-- [x] 1.9 Gear Sets link highlights when on /gear-sets or /gear-sets/*
+- [x] 1.4 gear_sets and gear_set_compositions tables visible in Supabase dashboard — 5b440ff
+- [x] 1.5 RLS enabled on both tables with correct policies listed — 5b440ff
+- [x] 1.6 gear_set_compositions has unique constraint and cascade FKs confirmed — 5b440ff
+- [x] 1.7 /gear-sets redirects to sign-in when unauthenticated — 5b440ff
+- [x] 1.8 AppNav shows Gear Sets as active link (not grayed out) — 5b440ff
+- [x] 1.9 Gear Sets link highlights when on /gear-sets or /gear-sets/* — 5b440ff
 
 ### Phase 2: API Routes
 
 #### Automated
 
-- [ ] 2.1 TypeScript check passes: `npx astro check`
-- [ ] 2.2 Lint passes: `npm run lint`
+- [x] 2.1 TypeScript check passes: `npx astro check`
+- [x] 2.2 Lint passes: `npm run lint`
 
 #### Manual
 
