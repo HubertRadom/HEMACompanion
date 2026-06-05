@@ -316,22 +316,22 @@ First database migration in the project. Create `supabase/migrations/` directory
 
 #### Automated
 
-- [x] 2.1 TypeScript check passes: `npx astro check`
-- [x] 2.2 Lint passes: `npm run lint`
-- [x] 2.3 Build succeeds: `npm run build`
+- [x] 2.1 TypeScript check passes: `npx astro check` — 3443fd7
+- [x] 2.2 Lint passes: `npm run lint` — 3443fd7
+- [x] 2.3 Build succeeds: `npm run build` — 3443fd7
 
 #### Manual
 
-- [x] 2.4 /gear redirects to sign-in when unauthenticated
+- [x] 2.4 /gear redirects to sign-in when unauthenticated — 3443fd7
 - [ ] 2.5 AppNav renders with Gear active and stubbed future links
-- [x] 2.6 Dashboard shows working link to /gear
+- [x] 2.6 Dashboard shows working link to /gear — 3443fd7
 
 ### Phase 3: API Routes
 
 #### Automated
 
-- [ ] 3.1 TypeScript check passes: `npx astro check`
-- [ ] 3.2 Lint passes: `npm run lint`
+- [x] 3.1 TypeScript check passes: `npx astro check`
+- [x] 3.2 Lint passes: `npm run lint`
 
 #### Manual
 
