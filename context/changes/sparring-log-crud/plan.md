@@ -319,31 +319,31 @@ Apply via `npx supabase db push` or paste directly into the Supabase dashboard S
 
 #### Automated
 
-- [x] 2.1 TypeScript check passes: `npx astro check`
-- [x] 2.2 Lint passes: `npm run lint`
+- [x] 2.1 TypeScript check passes: `npx astro check` — 81cb299
+- [x] 2.2 Lint passes: `npm run lint` — 81cb299
 
 #### Manual
 
-- [x] 2.3 Error redirect flows surface error messages on form pages
+- [x] 2.3 Error redirect flows surface error messages on form pages — 81cb299
 
 ### Phase 3: UI Pages
 
 #### Automated
 
-- [x] 3.1 TypeScript check passes: `npx astro check`
-- [x] 3.2 Lint passes: `npm run lint`
-- [x] 3.3 Build succeeds: `npm run build`
+- [x] 3.1 TypeScript check passes: `npx astro check` — 2ba154a
+- [x] 3.2 Lint passes: `npm run lint` — 2ba154a
+- [x] 3.3 Build succeeds: `npm run build` — 2ba154a
 
 #### Manual
 
-- [x] 3.4 /fights empty state renders correctly with "Log your first fight" CTA
-- [x] 3.5 Log form shows all five fields with date pre-filled to today
-- [x] 3.6 Logging a fight creates it in the list with correct result badge color
-- [x] 3.7 Client-side validation blocks submit with empty opponent name or date
-- [x] 3.8 Edit form pre-fills all fields correctly; saving updates the list
-- [x] 3.9 Changing gear set to "No gear set" on edit sets gear_set_id to null (no error)
-- [x] 3.10 Delete with confirm removes fight; cancel does not
-- [x] 3.11 Deleting a referenced gear set leaves fight in list with gear_set_id null
-- [x] 3.12 Second user cannot access first user's fight edit page (redirects with Fight not found)
-- [x] 3.13 Add form with no gear sets shows disabled gear set field with link to /gear-sets/add; form still submits
-- [x] 3.14 /fights redirects to sign-in when unauthenticated
+- [x] 3.4 /fights empty state renders correctly with "Log your first fight" CTA — 2ba154a
+- [x] 3.5 Log form shows all five fields with date pre-filled to today — 2ba154a
+- [x] 3.6 Logging a fight creates it in the list with correct result badge color — 2ba154a
+- [x] 3.7 Client-side validation blocks submit with empty opponent name or date — 2ba154a
+- [x] 3.8 Edit form pre-fills all fields correctly; saving updates the list — 2ba154a
+- [x] 3.9 Changing gear set to "No gear set" on edit sets gear_set_id to null (no error) — 2ba154a
+- [x] 3.10 Delete with confirm removes fight; cancel does not — 2ba154a
+- [x] 3.11 Deleting a referenced gear set leaves fight in list with gear_set_id null — 2ba154a
+- [x] 3.12 Second user cannot access first user's fight edit page (redirects with Fight not found) — 2ba154a
+- [x] 3.13 Add form with no gear sets shows disabled gear set field with link to /gear-sets/add; form still submits — 2ba154a
+- [x] 3.14 /fights redirects to sign-in when unauthenticated — 2ba154a
