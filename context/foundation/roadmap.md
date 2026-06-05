@@ -33,7 +33,7 @@ HEMA practitioners have no dedicated tool to track sparring history and gear usa
 | S-01 | gear-item-crud       | add, view, edit, and delete gear items                       | F-01          | FR-004, FR-005, FR-006, FR-007         | implemented |
 | S-02 | gear-set-crud        | create, view, edit, and delete gear sets                     | F-01, S-01    | FR-008, FR-009, FR-010, FR-011         | implemented |
 | S-03 | sparring-log-crud    | log, view, edit, and delete fights                           | F-01, S-01    | FR-012, FR-013, FR-014, FR-015, US-01  | implemented (impl_reviewed 2026-06-05) |
-| S-04 | statistics-dashboard | view fight count, winrate, top opponents, and gear usage     | S-02, S-03    | FR-016, FR-017, FR-018, FR-019, FR-020 | proposed |
+| S-04 | statistics-dashboard | view fight count, winrate, top opponents, and gear usage     | S-02, S-03    | FR-016, FR-017, FR-018, FR-019, FR-020 | implemented (impl_reviewed 2026-06-05) |
 
 ## Streams
 
@@ -119,7 +119,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** Performance NFR requires stats to render under 1 second for up to ~1,000 fights. The gear item fight count (tracing fights → gear sets → gear items) involves a multi-step join; at MVP data volumes this should be fine with indexed FKs, but worth verifying before claiming the NFR met.
-- **Status:** proposed
+- **Status:** implemented (impl_reviewed 2026-06-05)
 
 ## Backlog Handoff
 
