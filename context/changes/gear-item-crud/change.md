@@ -2,7 +2,7 @@
 change_id: gear-item-crud
 roadmap_id: S-01
 title: Gear item CRUD
-status: implemented
+status: impl_reviewed
 created: 2026-06-05
 updated: 2026-06-05
 prd_refs: FR-004, FR-005, FR-006, FR-007

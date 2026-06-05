@@ -4,12 +4,14 @@ import { createClient } from "@/lib/supabase";
 import type { GearItem } from "@/lib/types";
 
 const supabase = createClient(Astro.request.headers, Astro.cookies);
-const result = supabase
-  ? await supabase.from("gear_items").select("*").order("created_at", { ascending: false })
-  : null;
+const user = Astro.locals.user;
+const result =
+  supabase && user
+    ? await supabase.from("gear_items").select("*").eq("user_id", user.id).order("created_at", { ascending: false })
+    : null;
 const gearItems = (result?.data ?? []) as GearItem[];
 
-const error = Astro.url.searchParams.get("error");
+const error = result?.error?.message ?? Astro.url.searchParams.get("error");
 ---
 
 <AppLayout title="My Gear">

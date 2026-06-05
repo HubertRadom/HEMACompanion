@@ -6,7 +6,7 @@ import type { GearCategory } from "@/lib/gear-categories";
 export const POST: APIRoute = async (context) => {
   const supabase = createClient(context.request.headers, context.cookies);
   if (!supabase) {
-    return context.redirect("/auth/signin");
+    return context.redirect("/auth/signin?error=Supabase+is+not+configured");
   }
 
   const {

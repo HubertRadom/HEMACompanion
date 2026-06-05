@@ -6,12 +6,13 @@ import type { GearItem } from "@/lib/types";
 
 const { id } = Astro.params;
 const supabase = createClient(Astro.request.headers, Astro.cookies);
-
-const queryResult = supabase
-  ? await supabase.from("gear_items").select("*").eq("id", id).maybeSingle()
-  : { data: null };
+const user = Astro.locals.user;
+const queryResult =
+  supabase && user
+    ? await supabase.from("gear_items").select("*").eq("id", id).eq("user_id", user.id).maybeSingle()
+    : { data: null, error: null };
 const item = queryResult.data as GearItem | null;
-const error = Astro.url.searchParams.get("error");
+const error = queryResult.error?.message ?? Astro.url.searchParams.get("error");
 ---
 
 <AppLayout title="Edit Gear Item">

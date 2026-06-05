@@ -29,8 +29,8 @@ HEMA practitioners have no dedicated tool to track sparring history and gear usa
 
 | ID   | Change ID            | Outcome (user can …)                                         | Prerequisites | PRD refs                               | Status   |
 | ---- | -------------------- | ------------------------------------------------------------ | ------------- | -------------------------------------- | -------- |
-| F-01 | db-schema-rls        | (foundation) schema deployed + RLS enforcing data isolation  | —             | FR-001, FR-002, FR-003                 | ready    |
-| S-01 | gear-item-crud       | add, view, edit, and delete gear items                       | F-01          | FR-004, FR-005, FR-006, FR-007         | proposed |
+| F-01 | db-schema-rls        | (foundation) schema deployed + RLS enforcing data isolation  | —             | FR-001, FR-002, FR-003                 | partial (gear_items deployed in S-01; remaining tables land in S-02/S-03) |
+| S-01 | gear-item-crud       | add, view, edit, and delete gear items                       | F-01          | FR-004, FR-005, FR-006, FR-007         | implemented |
 | S-02 | gear-set-crud        | create, view, edit, and delete gear sets                     | F-01, S-01    | FR-008, FR-009, FR-010, FR-011         | proposed |
 | S-03 | sparring-log-crud    | log, view, edit, and delete fights                           | F-01, S-01    | FR-012, FR-013, FR-014, FR-015, US-01  | proposed |
 | S-04 | statistics-dashboard | view fight count, winrate, top opponents, and gear usage     | S-02, S-03    | FR-016, FR-017, FR-018, FR-019, FR-020 | proposed |
@@ -69,7 +69,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** Sequenced first because every subsequent slice assumes the schema contract. If RLS is mis-scoped — missing a table or using `auth.uid()` incorrectly — all downstream slices inherit the flaw silently. Catching it at the foundation stage is far cheaper than retrofitting across four slices.
-- **Status:** ready
+- **Status:** partial — `gear_items` table + RLS policies deployed as part of `gear-item-crud` (S-01). Remaining tables (`gear_sets`, `gear_set_compositions`, `fights`) land in S-02 and S-03 respectively.
 
 ## Slices
 
@@ -83,7 +83,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** First HEMA domain slice — it establishes the UI pattern (form → list → edit → delete) that S-02 and S-03 replicate. A mistake in the pattern here propagates forward into both parallel slices.
-- **Status:** proposed
+- **Status:** implemented (impl_reviewed 2026-06-05)
 
 ### S-02: Gear set CRUD
 
