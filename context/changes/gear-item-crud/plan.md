@@ -304,27 +304,27 @@ First database migration in the project. Create `supabase/migrations/` directory
 
 #### Automated
 
-- [x] 1.1 Migration applies cleanly: `npx supabase db push`
+- [x] 1.1 Migration applies cleanly: `npx supabase db push` — a880139
 
 #### Manual
 
-- [x] 1.2 gear_items table visible in Supabase dashboard
-- [x] 1.3 Row Level Security toggled ON with four policies listed
-- [x] 1.4 user_id FK constraint to auth.users(id) confirmed
+- [x] 1.2 gear_items table visible in Supabase dashboard — a880139
+- [x] 1.3 Row Level Security toggled ON with four policies listed — a880139
+- [x] 1.4 user_id FK constraint to auth.users(id) confirmed — a880139
 
 ### Phase 2: App Layout and Navigation
 
 #### Automated
 
-- [ ] 2.1 TypeScript check passes: `npx astro check`
-- [ ] 2.2 Lint passes: `npm run lint`
-- [ ] 2.3 Build succeeds: `npm run build`
+- [x] 2.1 TypeScript check passes: `npx astro check`
+- [x] 2.2 Lint passes: `npm run lint`
+- [x] 2.3 Build succeeds: `npm run build`
 
 #### Manual
 
-- [ ] 2.4 /gear redirects to sign-in when unauthenticated
+- [x] 2.4 /gear redirects to sign-in when unauthenticated
 - [ ] 2.5 AppNav renders with Gear active and stubbed future links
-- [ ] 2.6 Dashboard shows working link to /gear
+- [x] 2.6 Dashboard shows working link to /gear
 
 ### Phase 3: API Routes
 
