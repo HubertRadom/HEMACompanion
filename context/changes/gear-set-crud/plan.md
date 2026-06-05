@@ -311,24 +311,24 @@ Apply via `npx supabase db push` (requires `supabase login` and project linked t
 
 #### Manual
 
-- [x] 2.3 Error redirect flows surface error messages on form pages
+- [x] 2.3 Error redirect flows surface error messages on form pages — e537872
 
 ### Phase 3: UI Pages
 
 #### Automated
 
-- [x] 3.1 TypeScript check passes: `npx astro check`
-- [x] 3.2 Lint passes: `npm run lint`
-- [x] 3.3 Build succeeds: `npm run build`
+- [x] 3.1 TypeScript check passes: `npx astro check` — e537872
+- [x] 3.2 Lint passes: `npm run lint` — e537872
+- [x] 3.3 Build succeeds: `npm run build` — e537872
 
 #### Manual
 
-- [x] 3.4 /gear-sets empty state renders correctly for new user
-- [x] 3.5 Create form shows checkboxes and creates a set with item names visible in list
-- [x] 3.6 Client-side validation blocks submit with empty name or no items checked
-- [x] 3.7 Edit form pre-fills name and pre-checks correct items; saving updates the list
-- [x] 3.8 Delete with confirm removes set; cancel does not
-- [x] 3.9 Second user cannot access first user's set edit page (RLS enforced)
-- [x] 3.10 /gear-sets/add with no gear items shows empty state CTA instead of form
-- [x] 3.11 Deleting a gear item cascades: set shows No items on list page
-- [x] 3.12 /gear-sets redirects to sign-in when unauthenticated
+- [x] 3.4 /gear-sets empty state renders correctly for new user — e537872
+- [x] 3.5 Create form shows checkboxes and creates a set with item names visible in list — e537872
+- [x] 3.6 Client-side validation blocks submit with empty name or no items checked — e537872
+- [x] 3.7 Edit form pre-fills name and pre-checks correct items; saving updates the list — e537872
+- [x] 3.8 Delete with confirm removes set; cancel does not — e537872
+- [x] 3.9 Second user cannot access first user's set edit page (RLS enforced) — e537872
+- [x] 3.10 /gear-sets/add with no gear items shows empty state CTA instead of form — e537872
+- [x] 3.11 Deleting a gear item cascades: set shows No items on list page — e537872
+- [x] 3.12 /gear-sets redirects to sign-in when unauthenticated — e537872
