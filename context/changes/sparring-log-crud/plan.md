@@ -301,49 +301,49 @@ Apply via `npx supabase db push` or paste directly into the Supabase dashboard S
 
 #### Automated
 
-- [x] 1.1 Migration applies cleanly: `npx supabase db push` exits with no errors
-- [x] 1.2 TypeScript check passes: `npx astro check`
-- [x] 1.3 Lint passes: `npm run lint`
+- [x] 1.1 Migration applies cleanly: `npx supabase db push` exits with no errors — 877a764
+- [x] 1.2 TypeScript check passes: `npx astro check` — 877a764
+- [x] 1.3 Lint passes: `npm run lint` — 877a764
 
 #### Manual
 
-- [x] 1.4 fights table visible in Supabase dashboard with correct columns and types
-- [x] 1.5 RLS enabled on fights with four correct policies listed
-- [x] 1.6 gear_set_id is nullable with ON DELETE SET NULL FK (not cascade)
-- [x] 1.7 updated_at trigger visible on the fights table
-- [x] 1.8 /fights redirects to sign-in when unauthenticated
-- [x] 1.9 AppNav shows Fights as an active link (not grayed out)
-- [x] 1.10 Fights link highlights when on /fights or /fights/*
+- [x] 1.4 fights table visible in Supabase dashboard with correct columns and types — 877a764
+- [x] 1.5 RLS enabled on fights with four correct policies listed — 877a764
+- [x] 1.6 gear_set_id is nullable with ON DELETE SET NULL FK (not cascade) — 877a764
+- [x] 1.7 updated_at trigger visible on the fights table — 877a764
+- [x] 1.8 /fights redirects to sign-in when unauthenticated — 877a764
+- [x] 1.9 AppNav shows Fights as an active link (not grayed out) — 877a764
+- [x] 1.10 Fights link highlights when on /fights or /fights/* — 877a764
 
 ### Phase 2: API Routes
 
 #### Automated
 
-- [ ] 2.1 TypeScript check passes: `npx astro check`
-- [ ] 2.2 Lint passes: `npm run lint`
+- [x] 2.1 TypeScript check passes: `npx astro check`
+- [x] 2.2 Lint passes: `npm run lint`
 
 #### Manual
 
-- [ ] 2.3 Error redirect flows surface error messages on form pages
+- [x] 2.3 Error redirect flows surface error messages on form pages
 
 ### Phase 3: UI Pages
 
 #### Automated
 
-- [ ] 3.1 TypeScript check passes: `npx astro check`
-- [ ] 3.2 Lint passes: `npm run lint`
-- [ ] 3.3 Build succeeds: `npm run build`
+- [x] 3.1 TypeScript check passes: `npx astro check`
+- [x] 3.2 Lint passes: `npm run lint`
+- [x] 3.3 Build succeeds: `npm run build`
 
 #### Manual
 
-- [ ] 3.4 /fights empty state renders correctly with "Log your first fight" CTA
-- [ ] 3.5 Log form shows all five fields with date pre-filled to today
-- [ ] 3.6 Logging a fight creates it in the list with correct result badge color
-- [ ] 3.7 Client-side validation blocks submit with empty opponent name or date
-- [ ] 3.8 Edit form pre-fills all fields correctly; saving updates the list
-- [ ] 3.9 Changing gear set to "No gear set" on edit sets gear_set_id to null (no error)
-- [ ] 3.10 Delete with confirm removes fight; cancel does not
-- [ ] 3.11 Deleting a referenced gear set leaves fight in list with gear_set_id null
-- [ ] 3.12 Second user cannot access first user's fight edit page (redirects with Fight not found)
-- [ ] 3.13 Add form with no gear sets shows disabled gear set field with link to /gear-sets/add; form still submits
-- [ ] 3.14 /fights redirects to sign-in when unauthenticated
+- [x] 3.4 /fights empty state renders correctly with "Log your first fight" CTA
+- [x] 3.5 Log form shows all five fields with date pre-filled to today
+- [x] 3.6 Logging a fight creates it in the list with correct result badge color
+- [x] 3.7 Client-side validation blocks submit with empty opponent name or date
+- [x] 3.8 Edit form pre-fills all fields correctly; saving updates the list
+- [x] 3.9 Changing gear set to "No gear set" on edit sets gear_set_id to null (no error)
+- [x] 3.10 Delete with confirm removes fight; cancel does not
+- [x] 3.11 Deleting a referenced gear set leaves fight in list with gear_set_id null
+- [x] 3.12 Second user cannot access first user's fight edit page (redirects with Fight not found)
+- [x] 3.13 Add form with no gear sets shows disabled gear set field with link to /gear-sets/add; form still submits
+- [x] 3.14 /fights redirects to sign-in when unauthenticated
