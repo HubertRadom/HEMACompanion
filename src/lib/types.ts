@@ -23,3 +23,15 @@ export interface GearSetComposition {
   gear_item_id: string;
   created_at: string;
 }
+
+export interface Fight {
+  id: string;
+  user_id: string;
+  opponent_name: string;
+  weapon_category: string;
+  result: string;
+  date: string;
+  gear_set_id: string | null;
+  created_at: string;
+  updated_at: string;
+}
