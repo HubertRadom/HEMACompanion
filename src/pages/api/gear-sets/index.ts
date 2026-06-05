@@ -25,6 +25,15 @@ export const POST: APIRoute = async (context) => {
     return context.redirect(`/gear-sets/add?error=${encodeURIComponent("Select at least one gear item")}`);
   }
 
+  const { data: ownedItems, error: itemsCheckError } = await supabase
+    .from("gear_items")
+    .select("id")
+    .in("id", itemIds)
+    .eq("user_id", user.id);
+  if (itemsCheckError || ownedItems.length !== itemIds.length) {
+    return context.redirect(`/gear-sets/add?error=${encodeURIComponent("Invalid gear item selection")}`);
+  }
+
   const { data: gearSetData, error: setError } = await supabase
     .from("gear_sets")
     .insert({ user_id: user.id, name })
@@ -42,6 +51,7 @@ export const POST: APIRoute = async (context) => {
     .insert(itemIds.map((itemId) => ({ gear_set_id: newSetId, gear_item_id: itemId })));
 
   if (compError) {
+    await supabase.from("gear_sets").delete().eq("id", newSetId).eq("user_id", user.id);
     return context.redirect(`/gear-sets/add?error=${encodeURIComponent(compError.message)}`);
   }
 

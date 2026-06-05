@@ -2,7 +2,7 @@
 change_id: gear-set-crud
 roadmap_id: S-02
 title: Gear set CRUD
-status: implemented
+status: impl_reviewed
 created: 2026-06-05
 updated: 2026-06-05
 prd_refs: FR-008, FR-009, FR-010, FR-011

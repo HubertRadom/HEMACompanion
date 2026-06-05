@@ -28,14 +28,28 @@ export const POST: APIRoute = async (context) => {
     return context.redirect(`/gear-sets/${id}/edit?error=${encodeURIComponent("Select at least one gear item")}`);
   }
 
-  const { error: updateError } = await supabase
+  const { data: ownedItems, error: itemsCheckError } = await supabase
+    .from("gear_items")
+    .select("id")
+    .in("id", itemIds)
+    .eq("user_id", user.id);
+  if (itemsCheckError || ownedItems.length !== itemIds.length) {
+    return context.redirect(`/gear-sets/${id}/edit?error=${encodeURIComponent("Invalid gear item selection")}`);
+  }
+
+  const { data: updatedSet, error: updateError } = await supabase
     .from("gear_sets")
     .update({ name, updated_at: new Date().toISOString() })
     .eq("id", id)
-    .eq("user_id", user.id);
+    .eq("user_id", user.id)
+    .select("id")
+    .maybeSingle();
 
   if (updateError) {
     return context.redirect(`/gear-sets/${id}/edit?error=${encodeURIComponent(updateError.message)}`);
+  }
+  if (!updatedSet) {
+    return context.redirect(`/gear-sets/${id}/edit?error=${encodeURIComponent("Set not found")}`);
   }
 
   // Upsert new/kept compositions first, then delete stale ones.

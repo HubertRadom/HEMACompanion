@@ -21,7 +21,7 @@ const [setResult, itemsResult] =
           .eq("id", id)
           .eq("user_id", user.id)
           .maybeSingle(),
-        supabase.from("gear_items").select("*").eq("user_id", user.id).order("name"),
+        supabase.from("gear_items").select("id, name, category").eq("user_id", user.id).order("name"),
       ])
     : [
         { data: null, error: null },
