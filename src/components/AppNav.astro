@@ -3,6 +3,7 @@ const pathname = Astro.url.pathname;
 const isGear = pathname.startsWith("/gear") && !pathname.startsWith("/gear-sets");
 const isGearSets = pathname.startsWith("/gear-sets");
 const isFights = pathname.startsWith("/fights");
+const isStats = pathname.startsWith("/stats");
 ---
 
 <nav class="sticky top-0 z-10 border-b border-white/10 bg-black/30 backdrop-blur-xl">
@@ -39,7 +40,15 @@ const isFights = pathname.startsWith("/fights");
       >
         Fights
       </a>
-      <span class="cursor-default rounded-lg px-3 py-1.5 text-sm text-white/25">Stats</span>
+      <a
+        href="/stats"
+        class:list={[
+          "rounded-lg px-3 py-1.5 text-sm transition-colors",
+          isStats ? "bg-white/15 text-white" : "text-blue-100/70 hover:bg-white/10 hover:text-white",
+        ]}
+      >
+        Stats
+      </a>
     </div>
 
     <form method="POST" action="/api/auth/signout">
