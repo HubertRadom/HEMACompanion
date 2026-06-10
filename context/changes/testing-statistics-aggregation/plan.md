@@ -245,26 +245,26 @@ No data or schema migration. Pure code refactor + new dev tooling and tests.
 
 #### Automated
 
-- [x] 1.1 Typecheck passes: `npx astro check`
-- [x] 1.2 Linting passes: `npm run lint`
-- [x] 1.3 Build succeeds: `npm run build`
+- [x] 1.1 Typecheck passes: `npx astro check` — f0233e6
+- [x] 1.2 Linting passes: `npm run lint` — f0233e6
+- [x] 1.3 Build succeeds: `npm run build` — f0233e6
 
 #### Manual
 
-- [x] 1.4 Stats page renders identical numbers to pre-refactor for a seeded W/L/D + multi-category + shared-gear account
-- [x] 1.5 Empty account still shows the empty state and `"—"` winrate
+- [x] 1.4 Stats page renders identical numbers to pre-refactor for a seeded W/L/D + multi-category + shared-gear account — f0233e6
+- [x] 1.5 Empty account still shows the empty state and `"—"` winrate — f0233e6
 
 ### Phase 2: Bootstrap Vitest
 
 #### Automated
 
-- [ ] 2.1 `npm test` runs Vitest and the smoke test passes
-- [ ] 2.2 Typecheck still passes: `npx astro check`
-- [ ] 2.3 Linting passes on new files: `npm run lint`
+- [x] 2.1 `npm test` runs Vitest and the smoke test passes
+- [x] 2.2 Typecheck still passes: `npx astro check`
+- [x] 2.3 Linting passes on new files: `npm run lint`
 
 #### Manual
 
-- [ ] 2.4 `npm test` output shows Vitest discovered and ran the test file
+- [x] 2.4 `npm test` output shows Vitest discovered and ran the test file
 
 ### Phase 3: Oracle-driven unit tests (full edge matrix)
 
