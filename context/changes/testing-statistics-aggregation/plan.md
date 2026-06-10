@@ -258,25 +258,25 @@ No data or schema migration. Pure code refactor + new dev tooling and tests.
 
 #### Automated
 
-- [x] 2.1 `npm test` runs Vitest and the smoke test passes
-- [x] 2.2 Typecheck still passes: `npx astro check`
-- [x] 2.3 Linting passes on new files: `npm run lint`
+- [x] 2.1 `npm test` runs Vitest and the smoke test passes — f4722dc
+- [x] 2.2 Typecheck still passes: `npx astro check` — f4722dc
+- [x] 2.3 Linting passes on new files: `npm run lint` — f4722dc
 
 #### Manual
 
-- [x] 2.4 `npm test` output shows Vitest discovered and ran the test file
+- [x] 2.4 `npm test` output shows Vitest discovered and ran the test file — f4722dc
 
 ### Phase 3: Oracle-driven unit tests (full edge matrix)
 
 #### Automated
 
-- [ ] 3.1 All unit tests pass: `npm test`
-- [ ] 3.2 Typecheck passes: `npx astro check`
-- [ ] 3.3 Linting passes: `npm run lint`
+- [x] 3.1 All unit tests pass: `npm test`
+- [x] 3.2 Typecheck passes: `npx astro check`
+- [x] 3.3 Linting passes: `npm run lint`
 
 #### Manual
 
-- [ ] 3.4 Spot-check: flipping the winrate denominator makes the W/L/D-mix test fail (oracle is implementation-independent), then revert
+- [x] 3.4 Spot-check: flipping the winrate denominator makes the W/L/D-mix test fail (oracle is implementation-independent), then revert
 
 ### Phase 4: Update test-plan §6.1 cookbook
 
