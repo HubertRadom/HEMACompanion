@@ -1,7 +1,7 @@
 ---
 change_id: testing-statistics-aggregation
 title: Bootstrap test runner and lock statistics aggregation against independent oracles
-status: implementing
+status: implemented
 created: 2026-06-10
 updated: 2026-06-10
 archived_at: null

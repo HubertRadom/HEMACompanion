@@ -282,8 +282,8 @@ No data or schema migration. Pure code refactor + new dev tooling and tests.
 
 #### Automated
 
-- [x] 4.1 `test-plan.md` §6.1 no longer contains "TBD — see §3 Phase 1"
+- [x] 4.1 `test-plan.md` §6.1 no longer contains "TBD — see §3 Phase 1" — 3521404
 
 #### Manual
 
-- [x] 4.2 A reader can follow §6.1 to add a new unit test without further questions
+- [x] 4.2 A reader can follow §6.1 to add a new unit test without further questions — 3521404
