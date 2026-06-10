@@ -2,11 +2,10 @@
 import AppLayout from "@/layouts/AppLayout.astro";
 import { createClient } from "@/lib/supabase";
 import type { Fight } from "@/lib/types";
+import { computeStats } from "@/lib/stats";
 
 const supabase = createClient(Astro.request.headers, Astro.cookies);
 const user = Astro.locals.user;
-
-const WEAPON_CATEGORIES = ["longsword", "sabre", "rapier", "other"] as const;
 
 let fights: Fight[] = [];
 let gearSets: { id: string; name: string }[] = [];
@@ -41,71 +40,15 @@ if (supabase && user) {
 
 // Aggregations
 
-const totalFights = fights.length;
-
-const fightCountByCategory = WEAPON_CATEGORIES.map((cat) => ({
-  category: cat,
-  count: fights.filter((f) => f.weapon_category === cat).length,
-})).filter((c) => c.count > 0);
-
-const wins = fights.filter((f) => f.result === "win").length;
-const globalWinRate = totalFights === 0 ? "—" : `${Math.round((wins / totalFights) * 100)}%`;
-
-const winRateByCategory = WEAPON_CATEGORIES.map((cat) => {
-  const catFights = fights.filter((f) => f.weapon_category === cat);
-  const catWins = catFights.filter((f) => f.result === "win").length;
-  return {
-    category: cat,
-    total: catFights.length,
-    rate: catFights.length === 0 ? "—" : `${Math.round((catWins / catFights.length) * 100)}%`,
-  };
-}).filter((c) => c.total > 0);
-
-const opponentMap = new Map<string, number>();
-for (const fight of fights) {
-  opponentMap.set(fight.opponent_name, (opponentMap.get(fight.opponent_name) ?? 0) + 1);
-}
-const topOpponents = [...opponentMap.entries()]
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, 5)
-  .map(([name, count]) => ({ name, count }));
-
-const compositionsMap = new Map<string, string[]>();
-for (const comp of compositions) {
-  const items = compositionsMap.get(comp.gear_set_id) ?? [];
-  items.push(comp.gear_item_id);
-  compositionsMap.set(comp.gear_set_id, items);
-}
-const gearItemCountMap = new Map<string, number>();
-for (const fight of fights) {
-  if (fight.gear_set_id) {
-    const itemIds = compositionsMap.get(fight.gear_set_id) ?? [];
-    for (const itemId of itemIds) {
-      gearItemCountMap.set(itemId, (gearItemCountMap.get(itemId) ?? 0) + 1);
-    }
-  }
-}
-const gearItemCounts = [...gearItemCountMap.entries()]
-  .sort((a, b) => b[1] - a[1])
-  .map(([id, count]) => {
-    const item = gearItems.find((i) => i.id === id);
-    return item ? { id, name: item.name, count } : null;
-  })
-  .filter((x): x is { id: string; name: string; count: number } => x !== null);
-
-const gearSetCountMap = new Map<string, number>();
-for (const fight of fights) {
-  if (fight.gear_set_id) {
-    gearSetCountMap.set(fight.gear_set_id, (gearSetCountMap.get(fight.gear_set_id) ?? 0) + 1);
-  }
-}
-const gearSetUsage = [...gearSetCountMap.entries()]
-  .sort((a, b) => b[1] - a[1])
-  .map(([id, count]) => {
-    const set = gearSets.find((s) => s.id === id);
-    return set ? { id, name: set.name, count } : null;
-  })
-  .filter((x): x is { id: string; name: string; count: number } => x !== null);
+const {
+  totalFights,
+  fightCountByCategory,
+  globalWinRate,
+  winRateByCategory,
+  topOpponents,
+  gearItemCounts,
+  gearSetUsage,
+} = computeStats({ fights, gearSets, gearItems, compositions });
 ---
 
 <AppLayout title="Statistics">
