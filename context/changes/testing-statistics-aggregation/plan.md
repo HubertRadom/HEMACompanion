@@ -270,20 +270,20 @@ No data or schema migration. Pure code refactor + new dev tooling and tests.
 
 #### Automated
 
-- [x] 3.1 All unit tests pass: `npm test`
-- [x] 3.2 Typecheck passes: `npx astro check`
-- [x] 3.3 Linting passes: `npm run lint`
+- [x] 3.1 All unit tests pass: `npm test` — e96f100
+- [x] 3.2 Typecheck passes: `npx astro check` — e96f100
+- [x] 3.3 Linting passes: `npm run lint` — e96f100
 
 #### Manual
 
-- [x] 3.4 Spot-check: flipping the winrate denominator makes the W/L/D-mix test fail (oracle is implementation-independent), then revert
+- [x] 3.4 Spot-check: flipping the winrate denominator makes the W/L/D-mix test fail (oracle is implementation-independent), then revert — e96f100
 
 ### Phase 4: Update test-plan §6.1 cookbook
 
 #### Automated
 
-- [ ] 4.1 `test-plan.md` §6.1 no longer contains "TBD — see §3 Phase 1"
+- [x] 4.1 `test-plan.md` §6.1 no longer contains "TBD — see §3 Phase 1"
 
 #### Manual
 
-- [ ] 4.2 A reader can follow §6.1 to add a new unit test without further questions
+- [x] 4.2 A reader can follow §6.1 to add a new unit test without further questions

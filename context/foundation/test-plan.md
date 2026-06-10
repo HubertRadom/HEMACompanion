@@ -124,7 +124,12 @@ the relevant rollout phase ships; before that, the sub-section reads
 
 ### 6.1 Adding a unit test
 
-- TBD — see §3 Phase 1 (statistics aggregation: winrate / per-category count / fights→sets→items tracing, asserted against hand-computed oracles, never against the code under test).
+- **Runner**: Vitest (`node` environment, no jsdom/Astro harness). Config: `vitest.config.ts` (include glob `src/**/*.test.ts`; the `@/` alias mirrors `tsconfig`).
+- **Location**: colocated with the module under test in `src/lib/` — e.g. `src/lib/stats.ts` → `src/lib/stats.test.ts`.
+- **Naming**: `<module>.test.ts`.
+- **Reference test**: `src/lib/stats.test.ts` — fixture factories (`fight()`, `item()`, `set()`, `comp()`) build small, readable inputs; one `describe` per edge case.
+- **Run**: `npm test` (single run) or `npm run test:watch` (watch mode).
+- **Oracle rule (standing convention)**: expected values are literals hand-computed from product rules (PRD §Business Logic / the change's `research.md` §Oracle-definition decisions) — **never** produced by calling/snapshotting the code under test, nor by copying its arithmetic. A test you can break by flipping the implementation but not by re-deriving the rule is the goal (see the winrate-denominator spot-check in §3 Phase 1).
 
 ### 6.2 Adding an integration test
 
