@@ -61,3 +61,56 @@ describe("fights — Risk #2: write-path persistence oracle", () => {
     expect(error).not.toBeNull();
   });
 });
+
+describe("fights — Risk #6: nullable gear_set_id FK behaviour", () => {
+  it("D: fight with gear_set_id = null saves without error", async () => {
+    const { data: inserted, error: insertError } = await db
+      .from("fights")
+      .insert({
+        user_id: ctx.userId,
+        opponent_name: "Charlie",
+        weapon_category: "saber",
+        result: "draw",
+        date: "2026-06-14",
+        gear_set_id: null,
+      })
+      .select("id")
+      .single();
+    expect(insertError).toBeNull();
+
+    const { data: fight, error: selectError } = await db.from("fights").select("*").eq("id", inserted!.id).single();
+    expect(selectError).toBeNull();
+    expect(fight!.gear_set_id).toBeNull();
+  });
+
+  it("E: deleting a gear_set sets gear_set_id = null on referencing fights (ON DELETE SET NULL)", async () => {
+    const { data: gearSet, error: gearSetError } = await db
+      .from("gear_sets")
+      .insert({ user_id: ctx.userId, name: "Temp Set" })
+      .select("id")
+      .single();
+    expect(gearSetError).toBeNull();
+
+    const { data: inserted, error: insertError } = await db
+      .from("fights")
+      .insert({
+        user_id: ctx.userId,
+        opponent_name: "Dave",
+        weapon_category: "longsword",
+        result: "win",
+        date: "2026-06-14",
+        gear_set_id: gearSet!.id,
+      })
+      .select("id")
+      .single();
+    expect(insertError).toBeNull();
+
+    const { error: deleteError } = await db.from("gear_sets").delete().eq("id", gearSet!.id);
+    expect(deleteError).toBeNull();
+
+    // Fight must survive with gear_set_id nulled out
+    const { data: fight, error: selectError } = await db.from("fights").select("*").eq("id", inserted!.id).single();
+    expect(selectError).toBeNull();
+    expect(fight!.gear_set_id).toBeNull();
+  });
+});

@@ -313,28 +313,28 @@ No schema changes. All migrations are already applied by `supabase start` / `sup
 
 #### Automated
 
-- [x] 2.1 `npm run test:integration` passes (scenarios A, B, C all green)
-- [x] 2.2 `npm test` (unit) still passes unchanged
-- [x] 2.3 Typecheck passes: `npx astro check`
-- [x] 2.4 Linting passes: `npm run lint`
+- [x] 2.1 `npm run test:integration` passes (scenarios A, B, C all green) — 5f7525d
+- [x] 2.2 `npm test` (unit) still passes unchanged — 5f7525d
+- [x] 2.3 Typecheck passes: `npx astro check` — 5f7525d
+- [x] 2.4 Linting passes: `npm run lint` — 5f7525d
 
 #### Manual
 
-- [ ] 2.5 Spot-check Scenario A: fight row visible in Supabase Studio with correct field values
-- [ ] 2.6 Spot-check Scenario B/C: removing the `if (error)` guard in the handler does not make B or C pass (constraints enforced by PostgreSQL, not the guard)
+- [x] 2.5 Spot-check Scenario A: fight row visible in Supabase Studio with correct field values — 5f7525d
+- [x] 2.6 Spot-check Scenario B/C: removing the `if (error)` guard in the handler does not make B or C pass (constraints enforced by PostgreSQL, not the guard) — 5f7525d
 
 ### Phase 3: Risk #6 — no-gear save + SET NULL
 
 #### Automated
 
-- [ ] 3.1 `npm run test:integration` passes (all 5 scenarios A–E green)
-- [ ] 3.2 `npm test` (unit) still passes unchanged
-- [ ] 3.3 Typecheck passes: `npx astro check`
-- [ ] 3.4 Linting passes: `npm run lint`
+- [x] 3.1 `npm run test:integration` passes (all 5 scenarios A–E green)
+- [x] 3.2 `npm test` (unit) still passes unchanged
+- [x] 3.3 Typecheck passes: `npx astro check`
+- [x] 3.4 Linting passes: `npm run lint`
 
 #### Manual
 
-- [ ] 3.5 Supabase Studio shows empty `fights` + `gear_sets` tables after full test run (cascade teardown confirmed)
+- [x] 3.5 Supabase Studio shows empty `fights` + `gear_sets` tables after full test run (cascade teardown confirmed)
 
 ### Phase 4: Update §6.2 cookbook
 
