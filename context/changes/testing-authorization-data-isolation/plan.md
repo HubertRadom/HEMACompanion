@@ -480,8 +480,8 @@ No schema changes. No new migrations. All Phase 2 migrations remain unchanged.
 
 #### Automated
 
-- [x] 6.1 `test-plan.md §6.3` no longer contains "TBD — see §3 Phase 3"
+- [x] 6.1 `test-plan.md §6.3` no longer contains "TBD — see §3 Phase 3" — 541f16b
 
 #### Manual
 
-- [ ] 6.2 A reader unfamiliar with the project can follow §6.3 to add a new IDOR test or a new protected-route test without further questions
+- [x] 6.2 A reader unfamiliar with the project can follow §6.3 to add a new IDOR test or a new protected-route test without further questions — 541f16b

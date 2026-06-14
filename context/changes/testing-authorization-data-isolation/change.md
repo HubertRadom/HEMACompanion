@@ -1,7 +1,7 @@
 ---
 change_id: testing-authorization-data-isolation
 title: Integration tests for authorization and data isolation (Risks #3, #4, #5)
-status: implementing
+status: implemented
 created: 2026-06-14
 updated: 2026-06-14
 
