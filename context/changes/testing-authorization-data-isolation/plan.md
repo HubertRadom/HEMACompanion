@@ -451,30 +451,30 @@ No schema changes. No new migrations. All Phase 2 migrations remain unchanged.
 
 #### Automated
 
-- [x] 4.1 `npm run test:integration` passes all 8 existing tests after globalSetup is added
-- [x] 4.2 `process.env.TEST_BASE_URL` is `'http://localhost:4322'` inside a test
-- [x] 4.3 `fetch(process.env.TEST_BASE_URL + '/')` returns a response with any status code
+- [x] 4.1 `npm run test:integration` passes all 8 existing tests after globalSetup is added — 19ea64a
+- [x] 4.2 `process.env.TEST_BASE_URL` is `'http://localhost:4322'` inside a test — 19ea64a
+- [x] 4.3 `fetch(process.env.TEST_BASE_URL + '/')` returns a response with any status code — 19ea64a
 
 #### Manual
 
-- [x] 4.4 Test runner output shows the Astro dev server starting (no hanging)
-- [x] 4.5 No orphaned processes remain on port 4322 after `npm run test:integration` exits
+- [x] 4.4 Test runner output shows the Astro dev server starting (no hanging) — 19ea64a
+- [x] 4.5 No orphaned processes remain on port 4322 after `npm run test:integration` exits — 19ea64a
 
 ### Phase 5: Risks #4 + #5 — HTTP route protection and server validation
 
 #### Automated
 
-- [ ] 5.1 Risk #4: 3 unauthenticated redirect tests pass (I, J, K)
-- [ ] 5.2 Risk #5: 2 validation rejection tests pass (L, M)
-- [ ] 5.3 `npm run test:integration` passes all 13 scenarios
-- [ ] 5.4 `npm test` passes unchanged
-- [ ] 5.5 `npx astro check` passes
-- [ ] 5.6 `npm run lint` passes
+- [x] 5.1 Risk #4: 3 unauthenticated redirect tests pass (I, J, K)
+- [x] 5.2 Risk #5: 2 validation rejection tests pass (L, M)
+- [x] 5.3 `npm run test:integration` passes all 13 scenarios
+- [x] 5.4 `npm test` passes unchanged
+- [x] 5.5 `npx astro check` passes
+- [x] 5.6 `npm run lint` passes
 
 #### Manual
 
-- [ ] 5.7 Sign-in POST response contains non-empty `Set-Cookie` headers (confirm session cookie is captured)
-- [ ] 5.8 Spot-check: removing the `WEAPON_CATEGORIES.includes()` guard from `fights/index.ts` causes test L to fail; restore guard before committing
+- [x] 5.7 Sign-in POST response contains non-empty `Set-Cookie` headers (confirm session cookie is captured)
+- [x] 5.8 Spot-check: removing the `WEAPON_CATEGORIES.includes()` guard from `fights/index.ts` causes test L to fail; restore guard before committing
 
 ### Phase 6: Update §6.3 cookbook
 

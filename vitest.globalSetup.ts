@@ -16,16 +16,13 @@ export async function setup(): Promise<void> {
   const require = createRequire(import.meta.url);
   const astroRoot = path.dirname(require.resolve("astro/package.json"));
   const astroCli = path.join(astroRoot, "bin", "astro.mjs");
+  // "pipe" (string) uses the ChildProcessWithoutNullStreams overload so stdout is Readable.
   const proc = spawn(process.execPath, [astroCli, "dev", "--port", String(PORT)], {
-    stdio: ["ignore", "pipe", "pipe"],
+    stdio: "pipe",
     env: { ...process.env, SUPABASE_KEY: anonKey },
   });
   server = proc;
-
   const stdout = proc.stdout;
-  if (!stdout) {
-    throw new Error("Astro dev server has no stdout stream");
-  }
 
   await new Promise<void>((resolve, reject) => {
     const timer = setTimeout(() => {
@@ -48,7 +45,7 @@ export async function setup(): Promise<void> {
   process.env.TEST_BASE_URL = `http://localhost:${PORT}`;
 }
 
-export async function teardown(): Promise<void> {
+export function teardown(): void {
   server?.kill();
   server = undefined;
 }
