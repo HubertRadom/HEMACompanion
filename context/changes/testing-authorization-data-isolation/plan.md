@@ -438,27 +438,27 @@ No schema changes. No new migrations. All Phase 2 migrations remain unchanged.
 
 #### Automated
 
-- [x] 3.1 `npm test` passes (including new `fight-validation.test.ts`)
-- [x] 3.2 `npm run test:integration` passes (no regressions)
-- [x] 3.3 `npx astro check` passes
-- [x] 3.4 `npm run lint` passes
+- [x] 3.1 `npm test` passes (including new `fight-validation.test.ts`) — 0efdbff
+- [x] 3.2 `npm run test:integration` passes (no regressions) — 0efdbff
+- [x] 3.3 `npx astro check` passes — 0efdbff
+- [x] 3.4 `npm run lint` passes — 0efdbff
 
 #### Manual
 
-- [x] 3.5 Neither `src/pages/api/fights/index.ts` nor `[id].ts` contains a local `const WEAPON_CATEGORIES` or `const FIGHT_RESULTS` declaration
+- [x] 3.5 Neither `src/pages/api/fights/index.ts` nor `[id].ts` contains a local `const WEAPON_CATEGORIES` or `const FIGHT_RESULTS` declaration — 0efdbff
 
 ### Phase 4: Astro dev server global setup
 
 #### Automated
 
-- [ ] 4.1 `npm run test:integration` passes all 8 existing tests after globalSetup is added
-- [ ] 4.2 `process.env.TEST_BASE_URL` is `'http://localhost:4322'` inside a test
-- [ ] 4.3 `fetch(process.env.TEST_BASE_URL + '/')` returns a response with any status code
+- [x] 4.1 `npm run test:integration` passes all 8 existing tests after globalSetup is added
+- [x] 4.2 `process.env.TEST_BASE_URL` is `'http://localhost:4322'` inside a test
+- [x] 4.3 `fetch(process.env.TEST_BASE_URL + '/')` returns a response with any status code
 
 #### Manual
 
-- [ ] 4.4 Test runner output shows the Astro dev server starting (no hanging)
-- [ ] 4.5 No orphaned processes remain on port 4322 after `npm run test:integration` exits
+- [x] 4.4 Test runner output shows the Astro dev server starting (no hanging)
+- [x] 4.5 No orphaned processes remain on port 4322 after `npm run test:integration` exits
 
 ### Phase 5: Risks #4 + #5 — HTTP route protection and server validation
 

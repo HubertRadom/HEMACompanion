@@ -21,6 +21,9 @@ export default defineConfig(({ mode }) => {
       environment: "node",
       include: ["src/**/*.integration.test.ts"],
       setupFiles: ["src/test/setup.integration.ts"],
+      globalSetup: ["vitest.globalSetup.ts"],
+      // Integration tests share a real DB; serialise to avoid concurrent auth races.
+      maxWorkers: 1,
     },
   };
 });
