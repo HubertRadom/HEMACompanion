@@ -340,8 +340,8 @@ No schema changes. All migrations are already applied by `supabase start` / `sup
 
 #### Automated
 
-- [x] 4.1 `test-plan.md §6.2` no longer contains "TBD — see §3 Phase 2"
+- [x] 4.1 `test-plan.md §6.2` no longer contains "TBD — see §3 Phase 2" — 1753ad0
 
 #### Manual
 
-- [x] 4.2 A reader can follow §6.2 to add a new integration test without further questions
+- [x] 4.2 A reader can follow §6.2 to add a new integration test without further questions — 1753ad0
