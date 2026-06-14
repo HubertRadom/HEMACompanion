@@ -68,6 +68,16 @@ const astroConfig = tseslint.config({
   },
 });
 
+const integrationTestConfig = tseslint.config({
+  files: ["**/*.integration.test.ts"],
+  rules: {
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+  },
+});
+
 export default tseslint.config(
   includeIgnoreFile(gitignorePath),
   baseConfig,
@@ -75,5 +85,6 @@ export default tseslint.config(
   eslintPluginAstro.configs["flat/recommended"],
   ...eslintPluginAstro.configs["flat/jsx-a11y-recommended"],
   astroConfig,
+  integrationTestConfig,
   eslintPluginPrettier,
 );

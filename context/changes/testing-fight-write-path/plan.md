@@ -300,23 +300,23 @@ No schema changes. All migrations are already applied by `supabase start` / `sup
 
 #### Automated
 
-- [x] 1.1 `npm test` passes unchanged (unit tests, no Supabase running)
-- [x] 1.2 `npm run test:integration` runs and loads setup file (requires `supabase start`)
+- [x] 1.1 `npm test` passes unchanged (unit tests, no Supabase running) — c6c643e
+- [x] 1.2 `npm run test:integration` runs and loads setup file (requires `supabase start`) — c6c643e
 
 #### Manual
 
-- [x] 1.3 `supabase start` completes; URL + service-role key available via `supabase status`
-- [x] 1.4 `.env.test.local` populated with local credentials
-- [x] 1.5 `npm run test:integration` output shows setup.integration.ts loaded with no hook errors
+- [x] 1.3 `supabase start` completes; URL + service-role key available via `supabase status` — c6c643e
+- [x] 1.4 `.env.test.local` populated with local credentials — c6c643e
+- [x] 1.5 `npm run test:integration` output shows setup.integration.ts loaded with no hook errors — c6c643e
 
 ### Phase 2: Risk #2 — fight create persistence oracle
 
 #### Automated
 
-- [ ] 2.1 `npm run test:integration` passes (scenarios A, B, C all green)
-- [ ] 2.2 `npm test` (unit) still passes unchanged
-- [ ] 2.3 Typecheck passes: `npx astro check`
-- [ ] 2.4 Linting passes: `npm run lint`
+- [x] 2.1 `npm run test:integration` passes (scenarios A, B, C all green)
+- [x] 2.2 `npm test` (unit) still passes unchanged
+- [x] 2.3 Typecheck passes: `npx astro check`
+- [x] 2.4 Linting passes: `npm run lint`
 
 #### Manual
 
