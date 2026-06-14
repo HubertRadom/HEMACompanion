@@ -327,21 +327,21 @@ No schema changes. All migrations are already applied by `supabase start` / `sup
 
 #### Automated
 
-- [x] 3.1 `npm run test:integration` passes (all 5 scenarios A–E green)
-- [x] 3.2 `npm test` (unit) still passes unchanged
-- [x] 3.3 Typecheck passes: `npx astro check`
-- [x] 3.4 Linting passes: `npm run lint`
+- [x] 3.1 `npm run test:integration` passes (all 5 scenarios A–E green) — 976b5f4
+- [x] 3.2 `npm test` (unit) still passes unchanged — 976b5f4
+- [x] 3.3 Typecheck passes: `npx astro check` — 976b5f4
+- [x] 3.4 Linting passes: `npm run lint` — 976b5f4
 
 #### Manual
 
-- [x] 3.5 Supabase Studio shows empty `fights` + `gear_sets` tables after full test run (cascade teardown confirmed)
+- [x] 3.5 Supabase Studio shows empty `fights` + `gear_sets` tables after full test run (cascade teardown confirmed) — 976b5f4
 
 ### Phase 4: Update §6.2 cookbook
 
 #### Automated
 
-- [ ] 4.1 `test-plan.md §6.2` no longer contains "TBD — see §3 Phase 2"
+- [x] 4.1 `test-plan.md §6.2` no longer contains "TBD — see §3 Phase 2"
 
 #### Manual
 
-- [ ] 4.2 A reader can follow §6.2 to add a new integration test without further questions
+- [x] 4.2 A reader can follow §6.2 to add a new integration test without further questions

@@ -133,7 +133,19 @@ the relevant rollout phase ships; before that, the sub-section reads
 
 ### 6.2 Adding an integration test
 
-- TBD — see §3 Phase 2 (fight write-path: assert persisted DB state after a save, not the HTTP status; no-gear fight and FK-rejection cases).
+**Prerequisite**: local Supabase must be running — `npx supabase start`. Credentials are read from `.env.test.local` (gitignored; copy `.env.test.local.example` and fill in values from `npx supabase status`).
+
+**Runner**: `npm run test:integration` — runs Vitest with `vitest.integration.config.ts` (separate from the unit config; targets `src/**/*.integration.test.ts`; node environment; loads `.env.test.local` via Vite's `loadEnv`).
+
+**File location**: `src/lib/<feature>.integration.test.ts` — colocated with the module or feature under test.
+
+**Setup file pattern** (`src/test/setup.integration.ts`): exports a shared service-role Supabase client (`db`) and a mutable context object (`ctx`). `beforeAll` creates a real auth user via `db.auth.admin.createUser()` and stores the `user_id` in `ctx.userId` — required because `fights.user_id` is a NOT NULL FK to `auth.users` and the service-role key bypasses RLS but not FK constraints. `afterAll` deletes the user via `db.auth.admin.deleteUser(ctx.userId)`; `ON DELETE CASCADE` on `fights` and `gear_sets` removes all test rows automatically — no per-test cleanup needed.
+
+**Oracle rule**: after any write operation, run a **separate** `.select('*').eq('id', row.id).single()` query to verify the persisted state. Never use the `.insert(...).select()` chain's own return value as the oracle — that value is produced by the operation under test and will pass even if the row was never committed. For fight mutations (which return HTTP 302 redirects), HTTP status is not a viable oracle at all; always query the DB row.
+
+**Anti-pattern to avoid**: asserting the redirect destination URL or HTTP status code (`/fights` vs form page with `?error=`) instead of querying the persisted row. All fight mutations redirect on both success and error — only the DB state is authoritative.
+
+**Reference test**: `src/lib/fights.integration.test.ts` — five scenarios (A–E) covering all-fields persistence, NOT NULL violation, FK violation, null gear_set_id save, and SET NULL on gear_set delete.
 
 ### 6.3 Adding a test for an API endpoint / authorization
 
