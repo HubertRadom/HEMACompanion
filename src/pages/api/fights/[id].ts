@@ -1,8 +1,6 @@
 import type { APIRoute } from "astro";
+import { FIGHT_RESULTS, WEAPON_CATEGORIES } from "@/lib/fight-validation";
 import { createClient } from "@/lib/supabase";
-
-const WEAPON_CATEGORIES = ["longsword", "sabre", "rapier", "other"] as const;
-const FIGHT_RESULTS = ["win", "loss", "draw"] as const;
 
 export const POST: APIRoute = async (context) => {
   const supabase = createClient(context.request.headers, context.cookies);

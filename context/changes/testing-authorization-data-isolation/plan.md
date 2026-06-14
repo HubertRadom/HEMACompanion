@@ -424,28 +424,28 @@ No schema changes. No new migrations. All Phase 2 migrations remain unchanged.
 
 #### Automated
 
-- [x] 2.1 `npm run test:integration` passes (all 8 scenarios: A–E + F–H)
-- [x] 2.2 `npm test` passes unchanged
-- [x] 2.3 `npx astro check` passes
-- [x] 2.4 `npm run lint` passes
+- [x] 2.1 `npm run test:integration` passes (all 8 scenarios: A–E + F–H) — cd386d8
+- [x] 2.2 `npm test` passes unchanged — cd386d8
+- [x] 2.3 `npx astro check` passes — cd386d8
+- [x] 2.4 `npm run lint` passes — cd386d8
 
 #### Manual
 
-- [x] 2.5 Supabase Studio shows empty `fights` table after full test run (cascade teardown)
-- [x] 2.6 Spot-check Scenario G: changing the fight's `opponent_name` in the insert still results in the update test passing (mutation was denied)
+- [x] 2.5 Supabase Studio shows empty `fights` table after full test run (cascade teardown) — cd386d8
+- [x] 2.6 Spot-check Scenario G: changing the fight's `opponent_name` in the insert still results in the update test passing (mutation was denied) — cd386d8
 
 ### Phase 3: Extract fight validation constants
 
 #### Automated
 
-- [ ] 3.1 `npm test` passes (including new `fight-validation.test.ts`)
-- [ ] 3.2 `npm run test:integration` passes (no regressions)
-- [ ] 3.3 `npx astro check` passes
-- [ ] 3.4 `npm run lint` passes
+- [x] 3.1 `npm test` passes (including new `fight-validation.test.ts`)
+- [x] 3.2 `npm run test:integration` passes (no regressions)
+- [x] 3.3 `npx astro check` passes
+- [x] 3.4 `npm run lint` passes
 
 #### Manual
 
-- [ ] 3.5 Neither `src/pages/api/fights/index.ts` nor `[id].ts` contains a local `const WEAPON_CATEGORIES` or `const FIGHT_RESULTS` declaration
+- [x] 3.5 Neither `src/pages/api/fights/index.ts` nor `[id].ts` contains a local `const WEAPON_CATEGORIES` or `const FIGHT_RESULTS` declaration
 
 ### Phase 4: Astro dev server global setup
 
