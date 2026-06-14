@@ -464,23 +464,23 @@ No schema changes. No new migrations. All Phase 2 migrations remain unchanged.
 
 #### Automated
 
-- [x] 5.1 Risk #4: 3 unauthenticated redirect tests pass (I, J, K)
-- [x] 5.2 Risk #5: 2 validation rejection tests pass (L, M)
-- [x] 5.3 `npm run test:integration` passes all 13 scenarios
-- [x] 5.4 `npm test` passes unchanged
-- [x] 5.5 `npx astro check` passes
-- [x] 5.6 `npm run lint` passes
+- [x] 5.1 Risk #4: 3 unauthenticated redirect tests pass (I, J, K) — 2da8f30
+- [x] 5.2 Risk #5: 2 validation rejection tests pass (L, M) — 2da8f30
+- [x] 5.3 `npm run test:integration` passes all 13 scenarios — 2da8f30
+- [x] 5.4 `npm test` passes unchanged — 2da8f30
+- [x] 5.5 `npx astro check` passes — 2da8f30
+- [x] 5.6 `npm run lint` passes — 2da8f30
 
 #### Manual
 
-- [x] 5.7 Sign-in POST response contains non-empty `Set-Cookie` headers (confirm session cookie is captured)
-- [x] 5.8 Spot-check: removing the `WEAPON_CATEGORIES.includes()` guard from `fights/index.ts` causes test L to fail; restore guard before committing
+- [x] 5.7 Sign-in POST response contains non-empty `Set-Cookie` headers (confirm session cookie is captured) — 2da8f30
+- [x] 5.8 Spot-check: removing the `WEAPON_CATEGORIES.includes()` guard from `fights/index.ts` causes test L to fail; restore guard before committing — 2da8f30
 
 ### Phase 6: Update §6.3 cookbook
 
 #### Automated
 
-- [ ] 6.1 `test-plan.md §6.3` no longer contains "TBD — see §3 Phase 3"
+- [x] 6.1 `test-plan.md §6.3` no longer contains "TBD — see §3 Phase 3"
 
 #### Manual
 

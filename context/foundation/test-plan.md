@@ -149,7 +149,103 @@ the relevant rollout phase ships; before that, the sub-section reads
 
 ### 6.3 Adding a test for an API endpoint / authorization
 
-- TBD — see §3 Phase 3 (two-user IDOR probe: User A must not read/edit/delete User B's rows; protected-route gating; server-side payload validation).
+Two patterns are in use for Phase 3, each with its own prerequisite and oracle.
+
+---
+
+#### Pattern A — IDOR two-user probe (Supabase client level)
+
+**Prerequisite**: local Supabase running (`npx supabase start`). `SUPABASE_ANON_KEY` must be in `.env.test.local` (from `supabase status`). File must be `*.integration.test.ts`.
+
+**Sign in as a user** (returns an anon client that respects RLS — `auth.uid()` resolves to the user's ID):
+
+```ts
+import { createUserClient, ctx, db, USER_PASSWORD } from "@/test/setup.integration";
+const userBClient = await createUserClient(ctx.userBEmail, USER_PASSWORD);
+```
+
+**Create the target row** via service-role `db` (bypasses RLS, safe for test setup):
+
+```ts
+const { data: inserted, error } = await db
+  .from("fights")
+  .insert({ user_id: ctx.userId, opponent_name: "IDOR-Target", ... })
+  .select("id").single();
+if (error) throw error;
+const fightId = inserted.id;
+```
+
+**RLS SELECT oracle** — denied SELECT returns an **empty array**, not an error. Never use `.single()` for denied selects (it returns `PGRST116`, ambiguous with "row not found"):
+
+```ts
+const { data } = await userBClient.from("fights").select("*").eq("id", fightId);
+expect(data).toHaveLength(0);
+```
+
+**UPDATE / DELETE oracle** — silently denied; verify the row survived via service-role `db`:
+
+```ts
+await userBClient.from("fights").update({ opponent_name: "mutated" }).eq("id", fightId);
+const { data: fight } = await db.from("fights").select("opponent_name").eq("id", fightId).single();
+expect(fight!.opponent_name).toBe("IDOR-Target");
+```
+
+**Cleanup**: `afterAll` in `setup.integration.ts` deletes both users; `ON DELETE CASCADE` removes all their rows.
+
+**Scope note**: RLS is identical across `fights`, `gear_sets`, `gear_items`, `gear_set_compositions`. One table probe is sufficient to prove the enforcement layer.
+
+**Reference test**: `src/lib/idor.integration.test.ts` — scenarios F (SELECT), G (UPDATE), H (DELETE).
+
+---
+
+#### Pattern B — HTTP auth + server-side validation (Astro dev server)
+
+**Prerequisite**: local Supabase running. `npm run test:integration` starts `astro dev --port 4322` via `vitest.globalSetup.ts` — no manual server needed.
+
+**Base URL** (set by globalSetup):
+
+```ts
+const BASE_URL = process.env.TEST_BASE_URL ?? "http://localhost:4322";
+```
+
+**Always use `redirect: "manual"`** to capture the 302 without following it:
+
+```ts
+const res = await fetch(`${BASE_URL}/fights`, { redirect: "manual" });
+expect(res.status).toBe(302);
+expect(res.headers.get("location")).toBe("/auth/signin");
+```
+
+**Astro 6 CSRF**: `security.checkOrigin` is on by default. All POST requests need `Origin: BASE_URL` or they return 403:
+
+```ts
+await fetch(`${BASE_URL}/api/fights`, {
+  method: "POST", headers: { Origin: BASE_URL }, body: form, redirect: "manual",
+});
+```
+
+**Sign-in cookie capture** (for authenticated POST tests):
+
+```ts
+const form = new FormData();
+form.append("email", ctx.userAEmail);
+form.append("password", USER_PASSWORD);
+const signInRes = await fetch(`${BASE_URL}/api/auth/signin`, {
+  method: "POST", headers: { Origin: BASE_URL }, body: form, redirect: "manual",
+});
+const cookieHeader = signInRes.headers.getSetCookie()
+  .map((c) => c.split(";")[0]).join("; ");
+```
+
+Replay in subsequent requests: `headers: { Cookie: cookieHeader, Origin: BASE_URL }`.
+
+**Validation oracle** — invalid enum values produce a `?error=` query param in the Location header:
+
+```ts
+expect(res.headers.get("location")).toContain("error=Invalid%20weapon%20category");
+```
+
+**Reference test**: `src/lib/http-auth.integration.test.ts` — I–K (unauth redirects, Risk #4), L–M (enum validation, Risk #5).
 
 ### 6.4 Adding an e2e test
 
