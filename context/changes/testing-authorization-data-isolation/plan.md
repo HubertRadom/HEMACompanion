@@ -411,28 +411,28 @@ No schema changes. No new migrations. All Phase 2 migrations remain unchanged.
 
 #### Automated
 
-- [x] 1.1 `npm run test:integration` passes (all 5 Phase 2 scenarios still green)
-- [x] 1.2 `npm test` passes (unit tests unaffected)
+- [x] 1.1 `npm run test:integration` passes (all 5 Phase 2 scenarios still green) — b53600e
+- [x] 1.2 `npm test` passes (unit tests unaffected) — b53600e
 
 #### Manual
 
-- [ ] 1.3 `SUPABASE_ANON_KEY` documented in `.env.test.local.example`
-- [ ] 1.4 `ctx.userAEmail` and `ctx.userBEmail` are distinct non-empty strings before test execution
-- [ ] 1.5 `createUserClient(ctx.userAEmail, USER_PASSWORD)` connects without error in a scratch test
+- [x] 1.3 `SUPABASE_ANON_KEY` documented in `.env.test.local.example` — b53600e
+- [x] 1.4 `ctx.userAEmail` and `ctx.userBEmail` are distinct non-empty strings before test execution — b53600e
+- [x] 1.5 `createUserClient(ctx.userAEmail, USER_PASSWORD)` connects without error in a scratch test — b53600e
 
 ### Phase 2: Risk #3 — IDOR two-user probe
 
 #### Automated
 
-- [ ] 2.1 `npm run test:integration` passes (all 8 scenarios: A–E + F–H)
-- [ ] 2.2 `npm test` passes unchanged
-- [ ] 2.3 `npx astro check` passes
-- [ ] 2.4 `npm run lint` passes
+- [x] 2.1 `npm run test:integration` passes (all 8 scenarios: A–E + F–H)
+- [x] 2.2 `npm test` passes unchanged
+- [x] 2.3 `npx astro check` passes
+- [x] 2.4 `npm run lint` passes
 
 #### Manual
 
-- [ ] 2.5 Supabase Studio shows empty `fights` table after full test run (cascade teardown)
-- [ ] 2.6 Spot-check Scenario G: changing the fight's `opponent_name` in the insert still results in the update test passing (mutation was denied)
+- [x] 2.5 Supabase Studio shows empty `fights` table after full test run (cascade teardown)
+- [x] 2.6 Spot-check Scenario G: changing the fight's `opponent_name` in the insert still results in the update test passing (mutation was denied)
 
 ### Phase 3: Extract fight validation constants
 

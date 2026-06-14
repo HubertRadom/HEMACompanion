@@ -10,7 +10,11 @@ if (!supabaseUrl || !serviceRoleKey) {
   );
 }
 
-export const db = createClient(supabaseUrl, serviceRoleKey, {
+// Guaranteed strings after the throw guard above; stored to avoid non-null assertions in closures.
+const validatedUrl: string = supabaseUrl;
+const validatedServiceRoleKey: string = serviceRoleKey;
+
+export const db = createClient(validatedUrl, validatedServiceRoleKey, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 
@@ -63,12 +67,12 @@ export async function createUserClient(email: string, password: string): Promise
   if (!anonKey) {
     throw new Error("SUPABASE_ANON_KEY must be set in .env.test.local");
   }
-  const base = createClient(supabaseUrl!, anonKey, {
+  const base = createClient(validatedUrl, anonKey, {
     auth: { autoRefreshToken: false, persistSession: false },
   });
   const { data, error } = await base.auth.signInWithPassword({ email, password });
-  if (error || !data.session) throw error ?? new Error("No session returned from signInWithPassword");
-  return createClient(supabaseUrl!, anonKey, {
+  if (error) throw error;
+  return createClient(validatedUrl, anonKey, {
     global: { headers: { Authorization: `Bearer ${data.session.access_token}` } },
     auth: { autoRefreshToken: false, persistSession: false },
   });
