@@ -77,8 +77,8 @@ orchestrator updates Status as artifacts appear on disk.
 | # | Phase name | Goal (one line) | Risks covered | Test types | Status | Change folder |
 |---|------------|-----------------|---------------|------------|--------|---------------|
 | 1 | Bootstrap runner + statistics aggregation | Stand up the test runner and lock the High×High aggregation math against independent oracles | #1 | unit | complete | context/changes/testing-statistics-aggregation/ |
-| 2 | Fight write-path integrity | Prove a "successful" save means a persisted row; no-gear fights save; bad writes surface errors | #2, #6 | integration | planned | context/changes/testing-fight-write-path/ |
-| 3 | Authorization & data isolation | Two-user IDOR denied; protected routes gated; server validates independently | #3, #4, #5 | integration | not started | — |
+| 2 | Fight write-path integrity | Prove a "successful" save means a persisted row; no-gear fights save; bad writes surface errors | #2, #6 | integration | complete | context/changes/testing-fight-write-path/ |
+| 3 | Authorization & data isolation | Two-user IDOR denied; protected routes gated; server validates independently | #3, #4, #5 | integration | planned | context/changes/testing-authorization-data-isolation/ |
 | 4 | Quality-gates wiring + critical-path e2e | Lock lint/typecheck/unit+integration in CI; one e2e on register→gear→set→log→stats | cross-cutting | gates + e2e | not started | — |
 
 **Status vocabulary** (fixed — parser literals): `not started` → `change opened` → `researched` → `planned` → `implementing` → `complete`.
