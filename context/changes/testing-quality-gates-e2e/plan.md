@@ -513,11 +513,11 @@ compatible — the existing lint + build + deploy steps remain unchanged in posi
 
 #### Automated
 
-- [x] 3.1 `npm install` succeeds with `@playwright/test` in `node_modules`
+- [x] 3.1 `npm install` succeeds with `@playwright/test` in `node_modules` — f5e04d4
 - [ ] 3.2 `npx playwright install --with-deps chromium` exits 0 locally
 - [ ] 3.3 `npm run test:e2e` exits 0 with 0 tests (no spec yet)
 - [ ] 3.4 Push → Playwright cache step shows cache hit on second push
-- [x] 3.5 `npm run lint` passes on `playwright.config.ts` and `playwright/` files
+- [x] 3.5 `npm run lint` passes on `playwright.config.ts` and `playwright/` files — f5e04d4
 
 #### Manual
 
@@ -527,12 +527,12 @@ compatible — the existing lint + build + deploy steps remain unchanged in posi
 
 #### Automated
 
-- [x] 4.1 `npm run test:e2e` locally → 1 test passes
-- [x] 4.2 `npm run test:e2e` run twice → both pass
+- [x] 4.1 `npm run test:e2e` locally → 1 test passes — f5e04d4
+- [x] 4.2 `npm run test:e2e` run twice → both pass — f5e04d4
 - [ ] 4.3 Push → `npm run test:e2e` step in CI passes (all 4 gates green)
-- [x] 4.4 `npm run test:integration` still passes (13 scenarios A–M)
-- [x] 4.5 `npm test` still passes
-- [x] 4.6 `npx astro check` passes (no type errors in `playwright/` files)
+- [x] 4.4 `npm run test:integration` still passes (13 scenarios A–M) — f5e04d4
+- [x] 4.5 `npm test` still passes — f5e04d4
+- [x] 4.6 `npx astro check` passes (no type errors in `playwright/` files) — f5e04d4
 
 #### Manual
 
@@ -542,8 +542,8 @@ compatible — the existing lint + build + deploy steps remain unchanged in posi
 
 #### Automated
 
-- [x] 5.1 `§6.4` no longer contains "TBD"
-- [x] 5.2 `npm run lint` passes
+- [x] 5.1 `§6.4` no longer contains "TBD" — f5e04d4
+- [x] 5.2 `npm run lint` passes — f5e04d4
 
 #### Manual
 
