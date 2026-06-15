@@ -547,4 +547,4 @@ compatible — the existing lint + build + deploy steps remain unchanged in posi
 
 #### Manual
 
-- [ ] 5.3 A reader can follow §6.4 to add a new e2e spec without further questions
+- [x] 5.3 A reader can follow §6.4 to add a new e2e spec without further questions — self-reviewed: covers prerequisites, runner, user lifecycle, webServer, waitForReact + pressSequentially gotchas, oracle rule, reference test

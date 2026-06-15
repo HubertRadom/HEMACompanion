@@ -6,7 +6,7 @@
 >
 > Refresh: re-run `/10x-test-plan --refresh` when stale (see §8).
 >
-> Last updated: 2026-06-15 (Phase 4 complete)
+> Last updated: 2026-06-15 (all 4 phases complete — all CI gates green)
 
 ## 1. Strategy
 
@@ -79,7 +79,7 @@ orchestrator updates Status as artifacts appear on disk.
 | 1 | Bootstrap runner + statistics aggregation | Stand up the test runner and lock the High×High aggregation math against independent oracles | #1 | unit | complete | context/changes/testing-statistics-aggregation/ |
 | 2 | Fight write-path integrity | Prove a "successful" save means a persisted row; no-gear fights save; bad writes surface errors | #2, #6 | integration | complete | context/changes/testing-fight-write-path/ |
 | 3 | Authorization & data isolation | Two-user IDOR denied; protected routes gated; server validates independently | #3, #4, #5 | integration | complete | context/changes/testing-authorization-data-isolation/ |
-| 4 | Quality-gates wiring + critical-path e2e | Lock lint/typecheck/unit+integration in CI; one e2e on register→gear→set→log→stats | cross-cutting | gates + e2e | change opened | context/changes/testing-quality-gates-e2e/ |
+| 4 | Quality-gates wiring + critical-path e2e | Lock lint/typecheck/unit+integration in CI; one e2e on register→gear→set→log→stats | cross-cutting | gates + e2e | complete | context/changes/testing-quality-gates-e2e/ |
 
 **Status vocabulary** (fixed — parser literals): `not started` → `change opened` → `researched` → `planned` → `implementing` → `complete`.
 
@@ -290,7 +290,7 @@ Assert navigation success via `expect(page).toHaveURL('/target-route')` — the 
 
 ### 6.5 Per-rollout-phase notes
 
-(Optional. After each phase lands, `/10x-implement` appends a 2–3 line note here capturing anything surprising the phase taught — e.g. where the aggregation logic actually lived, or what harness the integration tests needed.)
+**Phase 4 (quality-gates + e2e):** Three non-obvious discoveries. (1) `@astrojs/cloudflare` adapter injects `vite.ssr.noExternal=true` when `prerenderEnvironment==="workerd"` (default), causing Vite to bundle `react-dom/server` as a separate SSR chunk — two React instances → "Invalid hook call" in CI dev mode. Fix: pass `prerenderEnvironment:"node"` via `ASTRO_PRERENDER_ENV` env var in `playwright.config.ts` webServer, leaving production builds on `workerd`. (2) Astro wraps `hydrateRoot` in `startTransition`, making React reconciliation async after `page.goto()` resolves — `page.fill()` types before event handlers attach. Fix: `waitForReact` helper polling `__reactFiber` + `pressSequentially`. (3) Fresh `supabase start` in CI does not auto-grant `anon`/`authenticated`/`service_role` on public tables (cloud does it at project creation). Fix: `supabase/migrations/20260605000004_grant_public_roles.sql`.
 
 ## 7. What We Deliberately Don't Test
 
