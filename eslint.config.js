@@ -82,6 +82,16 @@ const playwrightConfig = tseslint.config({
   files: ["playwright/**/*.ts", "playwright.config.ts"],
   rules: {
     "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-empty-function": "off",
+  },
+});
+
+const nodeConfigFilesConfig = tseslint.config({
+  files: ["*.mjs", "*.config.ts", "*.config.mjs"],
+  languageOptions: {
+    globals: {
+      process: "readonly",
+    },
   },
 });
 
@@ -94,5 +104,6 @@ export default tseslint.config(
   astroConfig,
   integrationTestConfig,
   playwrightConfig,
+  nodeConfigFilesConfig,
   eslintPluginPrettier,
 );
