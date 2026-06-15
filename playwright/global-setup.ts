@@ -27,4 +27,8 @@ export default async function globalSetup(): Promise<void> {
   process.env.E2E_USER_ID = data.user.id;
   process.env.E2E_USER_EMAIL = email;
   process.env.E2E_USER_PASSWORD = E2E_USER_PASSWORD;
+
+  // Warm up Vite's lazy compilation so the first test doesn't hit a cold-start timeout.
+  const baseURL = process.env.TEST_BASE_URL ?? "http://localhost:4322";
+  await fetch(`${baseURL}/auth/signin`).catch(() => {});
 }
