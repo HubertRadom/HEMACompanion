@@ -514,8 +514,8 @@ compatible — the existing lint + build + deploy steps remain unchanged in posi
 #### Automated
 
 - [x] 3.1 `npm install` succeeds with `@playwright/test` in `node_modules` — f5e04d4
-- [ ] 3.2 `npx playwright install --with-deps chromium` exits 0 locally
-- [ ] 3.3 `npm run test:e2e` exits 0 with 0 tests (no spec yet)
+- [x] 3.2 `npx playwright install --with-deps chromium` exits 0 locally — b346271
+- [x] 3.3 `npm run test:e2e` exits 0 with 0 tests (no spec yet)
 - [ ] 3.4 Push → Playwright cache step shows cache hit on second push
 - [x] 3.5 `npm run lint` passes on `playwright.config.ts` and `playwright/` files — f5e04d4
 
@@ -536,7 +536,7 @@ compatible — the existing lint + build + deploy steps remain unchanged in posi
 
 #### Manual
 
-- [ ] 4.7 Break stats page → spec fails with readable assertion error; restore → passes
+- [x] 4.7 Break stats page → spec fails with readable assertion error; restore → passes — b346271
 
 ### Phase 5: Cookbook update
 
