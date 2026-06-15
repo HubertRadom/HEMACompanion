@@ -22,6 +22,10 @@ pnpm-debug.log*
 .dev.vars
 .wrangler/
 
+# playwright
+test-results/
+playwright-report/
+
 # macOS-specific files
 .DS_Store
 
