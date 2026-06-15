@@ -6,7 +6,7 @@
 >
 > Refresh: re-run `/10x-test-plan --refresh` when stale (see §8).
 >
-> Last updated: 2026-06-10 (Phase 1 change opened)
+> Last updated: 2026-06-15 (Phase 4 complete)
 
 ## 1. Strategy
 
@@ -78,8 +78,8 @@ orchestrator updates Status as artifacts appear on disk.
 |---|------------|-----------------|---------------|------------|--------|---------------|
 | 1 | Bootstrap runner + statistics aggregation | Stand up the test runner and lock the High×High aggregation math against independent oracles | #1 | unit | complete | context/changes/testing-statistics-aggregation/ |
 | 2 | Fight write-path integrity | Prove a "successful" save means a persisted row; no-gear fights save; bad writes surface errors | #2, #6 | integration | complete | context/changes/testing-fight-write-path/ |
-| 3 | Authorization & data isolation | Two-user IDOR denied; protected routes gated; server validates independently | #3, #4, #5 | integration | planned | context/changes/testing-authorization-data-isolation/ |
-| 4 | Quality-gates wiring + critical-path e2e | Lock lint/typecheck/unit+integration in CI; one e2e on register→gear→set→log→stats | cross-cutting | gates + e2e | not started | — |
+| 3 | Authorization & data isolation | Two-user IDOR denied; protected routes gated; server validates independently | #3, #4, #5 | integration | complete | context/changes/testing-authorization-data-isolation/ |
+| 4 | Quality-gates wiring + critical-path e2e | Lock lint/typecheck/unit+integration in CI; one e2e on register→gear→set→log→stats | cross-cutting | gates + e2e | change opened | context/changes/testing-quality-gates-e2e/ |
 
 **Status vocabulary** (fixed — parser literals): `not started` → `change opened` → `researched` → `planned` → `implementing` → `complete`.
 
@@ -249,7 +249,44 @@ expect(res.headers.get("location")).toContain("error=Invalid%20weapon%20category
 
 ### 6.4 Adding an e2e test
 
-- TBD — see §3 Phase 4 (single critical-path flow: register → add gear → create set → log fight → view stats).
+**Prerequisites**: local Supabase must be running (`npx supabase start`) and `.env.test.local` populated with `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` (same as §6.2).
+
+**Runner**: `npm run test:e2e` → `playwright test` (Chromium only, config: `playwright.config.ts`). `playwright.config.ts` mirrors the `loadEnv` pattern from `vitest.integration.config.ts` — loads `.env.test.local` for local dev; in CI the vars arrive via `$GITHUB_ENV` and the `loadEnv` call is a no-op.
+
+**User lifecycle** (`playwright/global-setup.ts` / `playwright/global-teardown.ts`):
+- `global-setup.ts` creates one confirmed test user via `db.auth.admin.createUser({ email_confirm: true })` using the service-role key; stores the user ID, email, and password in `process.env.E2E_USER_*` so specs can read them.
+- `global-teardown.ts` deletes the user after all specs run; `ON DELETE CASCADE` on `fights` and `gear_sets` removes all test data automatically — no per-resource cleanup needed.
+- Email is timestamp-based (`` `e2e+${Date.now()}@integration.test` ``) for uniqueness across runs.
+
+**webServer**: Playwright starts a fresh Astro dev server on port 4322 via `playwright.config.ts` `webServer.command`. It passes `SUPABASE_KEY = SUPABASE_ANON_KEY` to the child process (same mapping as `vitest.globalSetup.ts`). In CI (`process.env.CI` set) `reuseExistingServer: false` ensures a clean server; locally `true` lets you reuse a running dev server.
+
+**Form interaction pattern**: all forms use standard HTML `method="POST"` with React-controlled inputs. Two non-obvious rules apply:
+
+1. **Wait for React hydration before typing.** Astro wraps `hydrateRoot` in `startTransition`, so the reconciliation work is scheduled asynchronously via `MessageChannel`. Playwright's `page.goto()` resolves on the `load` event, but React's fiber tree may not yet be live. Use a `waitForFunction` that polls for the `__reactFiber` property React attaches to DOM nodes once reconciliation completes:
+
+   ```ts
+   await page.waitForFunction((sel) => {
+     const el = document.querySelector(sel);
+     return el ? Object.keys(el).some((k) => k.startsWith("__reactFiber")) : false;
+   }, "#first-input-id");
+   ```
+
+2. **Use `pressSequentially` for controlled text inputs, `selectOption` for selects.** React controlled inputs need real keyboard events (each key fires `input` event → React `onChange` → `setState`). `page.fill()` sets the DOM value directly and may not trigger the React state update. `page.selectOption()` fires a real `change` event and always works for `<select>` elements.
+
+   ```ts
+   await page.locator("#name").pressSequentially("My Sword");
+   await page.selectOption("#category", "Longsword");
+   await page.locator("input[type='checkbox'][name='item_ids']").check();
+   await page.getByRole("button", { name: "Save gear item" }).click();
+   ```
+
+   Use `page.getByRole("button", { name: "..." })` not `page.click("button[type='submit']")` — AppNav renders a Sign Out submit button before form submit buttons in the DOM.
+
+Assert navigation success via `expect(page).toHaveURL('/target-route')` — the redirect URL is the implicit assertion; errors would surface via a `?error=` URL param (which the spec must NOT assert on — see Lessons).
+
+**Stats page oracle rule**: after logging a fight with specific user-input strings, navigate to `/stats` and assert those strings are **visible** — e.g. `expect(page.getByText('E2E-Opponent')).toBeVisible()`. Never derive expected values by calling `computeStats()` or copying its output — that mirrors the implementation and will silently pass against bugs.
+
+**Reference test**: `playwright/critical-path.spec.ts` — covers sign in → add gear item → create gear set → log fight → `/stats` assertions on opponent name, gear set name, and gear item name.
 
 ### 6.5 Per-rollout-phase notes
 

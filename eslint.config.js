@@ -78,6 +78,13 @@ const integrationTestConfig = tseslint.config({
   },
 });
 
+const playwrightConfig = tseslint.config({
+  files: ["playwright/**/*.ts", "playwright.config.ts"],
+  rules: {
+    "@typescript-eslint/no-non-null-assertion": "off",
+  },
+});
+
 export default tseslint.config(
   includeIgnoreFile(gitignorePath),
   baseConfig,
@@ -86,5 +93,6 @@ export default tseslint.config(
   ...eslintPluginAstro.configs["flat/jsx-a11y-recommended"],
   astroConfig,
   integrationTestConfig,
+  playwrightConfig,
   eslintPluginPrettier,
 );
