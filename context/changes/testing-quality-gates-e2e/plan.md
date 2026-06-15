@@ -495,7 +495,7 @@ compatible — the existing lint + build + deploy steps remain unchanged in posi
 
 #### Manual
 
-- [ ] 1.3 Introduce a deliberate TypeScript error, push → CI fails at `npx astro check`; revert → CI passes
+- [x] 1.3 Introduce a deliberate TypeScript error, push → CI fails at `npx astro check`; revert → CI passes — 1e3ad07 / c1001fe
 
 ### Phase 2: Supabase CLI in CI + integration gate
 
@@ -507,7 +507,7 @@ compatible — the existing lint + build + deploy steps remain unchanged in posi
 
 #### Manual
 
-- [ ] 2.4 Inspect CI log: Astro dev server starts and is killed cleanly in teardown
+- [x] 2.4 Inspect CI log: Astro dev server starts and is killed cleanly in teardown — b692b69 (run 27533035279: integration tests on port 4321 complete before e2e starts on 4322, no port conflict)
 
 ### Phase 3: Playwright infrastructure
 
@@ -521,7 +521,7 @@ compatible — the existing lint + build + deploy steps remain unchanged in posi
 
 #### Manual
 
-- [ ] 3.6 Run `npm run test:e2e` without Supabase → clear error about missing env var
+- [x] 3.6 Run `npm run test:e2e` without Supabase → clear error about missing env var — verified locally: "SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set — run `supabase start` and populate .env.test.local first."
 
 ### Phase 4: Critical-path e2e spec
 
