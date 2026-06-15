@@ -37,7 +37,7 @@ jobs:
           key: playwright-${{ hashFiles('package-lock.json') }}
       - run: npx playwright install --with-deps chromium
       - name: Clear Vite SSR cache before e2e
-        run: rm -rf .vite
+        run: rm -rf node_modules/.vite
       - run: npm run test:e2e
       - name: Upload Playwright report
         if: failure()
