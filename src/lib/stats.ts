@@ -62,7 +62,7 @@ export interface Stats {
   gearSetUsage: NamedCount[];
 }
 
-export function totalFights(fights: FightInput[]): string {
+export function totalFights(fights: FightInput[]): number {
   return fights.length;
 }
 
