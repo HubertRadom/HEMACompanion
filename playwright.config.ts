@@ -20,6 +20,7 @@ export default defineConfig({
       ...(process.env as Record<string, string>),
       SUPABASE_KEY: process.env.SUPABASE_ANON_KEY ?? "",
       ASTRO_PRERENDER_ENV: "node",
+      ASTRO_DEV_TOOLBAR: "false",
     },
     timeout: 60_000,
   },

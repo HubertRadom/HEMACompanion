@@ -11,6 +11,10 @@ import cloudflare from "@astrojs/cloudflare";
 // is only injected when prerenderEnvironment === "workerd").
 const prerenderEnvironment = process.env.ASTRO_PRERENDER_ENV === "node" ? "node" : "workerd";
 
+// In e2e tests the dev toolbar floats over submit buttons at the bottom of the viewport,
+// intercepting pointer events when the server is under load (parallel workers).
+const devToolbarEnabled = process.env.ASTRO_DEV_TOOLBAR !== "false";
+
 // https://astro.build/config
 export default defineConfig({
   output: "server",
@@ -21,6 +25,7 @@ export default defineConfig({
       dedupe: ["react", "react-dom", "react-dom/server"],
     },
   },
+  devToolbar: { enabled: devToolbarEnabled },
   adapter: cloudflare({ prerenderEnvironment }),
   env: {
     schema: {
