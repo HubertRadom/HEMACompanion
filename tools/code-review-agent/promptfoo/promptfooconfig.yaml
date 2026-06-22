@@ -1,0 +1,68 @@
+# Code-review gate — model comparison + prompt regression suite.
+#
+# Runs the SAME structured-review function (via provider.mjs) across 2-3 models
+# on the same diffs, so "cheaper vs pricier model" is answered by a hard matrix
+# (pass/fail + cost + latency), not a single PR's vibe. Keep this suite green as
+# a regression gate when you change the criteria or the prompt.
+#
+#   npm run eval        # run the matrix
+#   npm run eval:view   # open the results UI
+#
+# Each provider points at the same file with a different model in `config`.
+description: HEMA Companion code-review gate
+
+prompts:
+  # The provider builds the real criteria prompt; we just pass the diff through.
+  - "{{diff}}"
+
+providers:
+  - id: file://provider.mjs
+    label: opus-4-8
+    config:
+      model: claude-opus-4-8
+  - id: file://provider.mjs
+    label: sonnet-4-6
+    config:
+      model: claude-sonnet-4-6
+  - id: file://provider.mjs
+    label: haiku-4-5
+    config:
+      model: claude-haiku-4-5
+
+# Every model must at least return schema-shaped JSON.
+defaultTest:
+  assert:
+    - type: is-json
+
+tests:
+  - description: "vulnerable diff must be BLOCKED (security_rls fails, REQUEST_CHANGES)"
+    vars:
+      diff: file://../fixtures/sample.diff
+    assert:
+      - type: javascript
+        value: |
+          const r = JSON.parse(output);
+          const sec = r.criteria.find((c) => c.id === "security_rls");
+          if (!sec || sec.status !== "fail") {
+            throw new Error("expected security_rls=fail, got " + (sec ? sec.status : "missing"));
+          }
+          if (r.verdict !== "REQUEST_CHANGES") {
+            throw new Error("expected REQUEST_CHANGES, got " + r.verdict);
+          }
+          return true;
+
+  - description: "clean, validated, tested diff must NOT be blocked"
+    vars:
+      diff: file://../fixtures/clean.diff
+    assert:
+      - type: javascript
+        value: |
+          const r = JSON.parse(output);
+          const failed = r.criteria.filter((c) => c.status === "fail");
+          if (failed.length > 0) {
+            throw new Error("clean diff failed: " + failed.map((c) => c.id).join(", "));
+          }
+          if (r.verdict === "REQUEST_CHANGES") {
+            throw new Error("clean diff should not be REQUEST_CHANGES");
+          }
+          return true;

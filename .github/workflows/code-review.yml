@@ -1,0 +1,62 @@
+name: AI Code Review
+
+# Runs the scripted code-review agent (tools/code-review-agent) on every PR,
+# posts the structured verdict as a PR comment, and fails the check when the
+# change is BLOCKED — the gate the pipeline enforces.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  ai-code-review:
+    name: AI code review
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install review agent (runtime deps only)
+        working-directory: tools/code-review-agent
+        run: npm ci --omit=dev
+
+      - name: Build the PR diff
+        run: |
+          git diff \
+            "${{ github.event.pull_request.base.sha }}" \
+            "${{ github.event.pull_request.head.sha }}" \
+            -- . ':(exclude)tools/code-review-agent/**' ':(exclude)**/package-lock.json' \
+            > "$GITHUB_WORKSPACE/pr.diff"
+          echo "Reviewing $(wc -l < "$GITHUB_WORKSPACE/pr.diff") changed diff lines"
+
+      - name: Run code review
+        id: review
+        working-directory: tools/code-review-agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          REVIEW_MODEL: claude-sonnet-4-6
+        run: |
+          set +e
+          node src/pr-comment.mjs "$GITHUB_WORKSPACE/pr.diff" | tee "$GITHUB_WORKSPACE/comment.md"
+          echo "gate_exit=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: Post review as a PR comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr comment "${{ github.event.pull_request.number }}" --body-file "$GITHUB_WORKSPACE/comment.md"
+
+      - name: Enforce gate (fail the check if BLOCKED)
+        run: |
+          echo "Gate exit code: ${{ steps.review.outputs.gate_exit }}"
+          exit ${{ steps.review.outputs.gate_exit }}
