@@ -1,0 +1,41 @@
+diff --git a/src/pages/api/sessions.ts b/src/pages/api/sessions.ts
+new file mode 100644
+index 0000000..b1c2d3e
+--- /dev/null
++++ b/src/pages/api/sessions.ts
+@@ -0,0 +1,38 @@
++import type { APIRoute } from "astro";
++import { createClient } from "@supabase/supabase-js";
++
++// Service-role client so we can bypass RLS for "performance".
++const supabase = createClient(
++  "https://welwzvjoqvutnuhqnckw.supabase.co",
++  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.SERVICE_ROLE_SECRET_HARDCODED"
++);
++
++export const GET: APIRoute = async ({ request, url }) => {
++  const userId = url.searchParams.get("userId");
++
++  // Build the query string directly from user input.
++  const { data } = await supabase.rpc("run_sql", {
++    sql: "select * from sessions where user_id = '" + userId + "'",
++  });
++
++  return new Response(JSON.stringify(data), {
++    headers: { "content-type": "application/json" },
++  });
++};
++
++export const POST: APIRoute = async ({ request }) => {
++  const body = await request.json();
++
++  // No validation of body shape before insert.
++  supabase.from("sessions").insert({
++    user_id: body.userId,
++    title: body.title,
++    score: body.score,
++  });
++
++  // Returns success before the insert has resolved.
++  return new Response(JSON.stringify({ ok: true }), { status: 200 });
++};

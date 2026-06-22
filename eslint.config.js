@@ -97,6 +97,8 @@ const nodeConfigFilesConfig = tseslint.config({
 
 export default tseslint.config(
   includeIgnoreFile(gitignorePath),
+  // Independent tooling and demo fixtures are not part of the app's typed project.
+  { ignores: ["tools/**", "examples/**"] },
   baseConfig,
   reactConfig,
   eslintPluginAstro.configs["flat/recommended"],
